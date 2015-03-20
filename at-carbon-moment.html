@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="momentjs-import.html"/>
+<link rel="import" href="../at-core-theme/at-core-theme.html">
 
 <!--
 A Polymer wrapper for moment.js.
@@ -11,122 +12,163 @@ A Polymer wrapper for moment.js.
 @element at-carbon-moment
 @homepage http://cletusw.github.io/at-carbon-moment
 -->
-<polymer-element name="at-carbon-moment">
-
-  <template>
-
-    <link rel="stylesheet" href="at-carbon-moment.css" />
-
-    <content></content>
-
-  </template>
-
-  <script>
-
-    Polymer('at-carbon-moment', {
-
-      publish: {
-        /**
-         * When greater than 0, specifies the time (in seconds) between
-         * automatic calls to the `refresh` method.
-         *
-         * When used as a boolean attribute, the defaultAutoRefreshRate is
-         * used.
-         *
-         * @attribute autoRefresh
-         * @type int or bool
-         */
-        autoRefresh: 0,
-        datetime: '',
-        format: '',
-        formats: {
-          reflect: true,
-          value: []
+<dom-module id="at-carbon-moment">
+    <style>
+        :host {
+            display: block;
+        }
+    </style>
+    <template>
+        <at-core-theme></at-core-theme>
+        <div id="calculatedTime"></div>
+    </template>
+</dom-module>
+<script>
+    Polymer({
+        is:'at-carbon-moment',
+        properties:{
+            /**
+            * When greater than 0, specifies the time (in seconds) between
+            * automatic calls to the `refresh` method.
+            *
+            * When used as a boolean attribute, the defaultAutoRefreshRate is
+            * used.
+            */
+            autoRefresh: {
+                type:Number,
+                value:0
+            },
+             /**
+            * Value that the autoRefresh property should be set to when its
+            * corresponding attribute is used as a boolean (no period specified).
+            */
+            defaultAutoRefreshRate: {
+                type:Number, 
+                value:60
+            },
+            datetime:{
+                type:Date,
+                value:'',
+                observe:'createMoment'
+            },
+            format:{
+                type:String, 
+                value:'',
+                observe:'createMoment'
+            },
+            formats: {
+                type:Array,
+                value: [],
+                reflect: true,
+                observe:'createMoment'
+            },
+            fromNow: {
+                type:Boolean, 
+                value:false,
+                observe:'createMoment'
+            },
+            lang: {
+                type:String, 
+                value:'',
+                observe:'createMoment'
+            },
+            noSuffix: {
+                type:Boolean, 
+                value:false,
+                observe:'createMoment'
+            },
+            strict: {
+                type:Boolean, 
+                value:false,
+                observe:'createMoment'
+            },
+            unixOffset: {
+                type:Number, 
+                value:0,
+                observe:'createMoment'
+            },
+            unixTimestamp: {
+                type:Number, 
+                value:0,
+                observe:'createMoment'
+            },
+            utc: {
+                type:Boolean, 
+                value:false,
+                observe:'createMoment'
+            },           
+            intervalId: {
+                type:Number, 
+                value:0
+            },
+            moment: {
+                type:Object,
+                value:{}
+            }
         },
-        fromNow: false,
-        lang: '',
-        noSuffix: false,
-        strict: false,
-        unixOffset: 0,
-        unixTimestamp: 0,
-        utc: false
-      },
+        
+        observers:{
+            'autoRefresh' : 'autoRefreshChanged',
+            'moment.*' : 'momentChanged'
+        },
+        
+        ready: function(){
+            this._afterReady = true;
+            this.createMoment();
+        },
+        
+        autoRefreshChanged: function() {
+            /*if (!this._afterReady) {
+                return;
+            }*/
+            
+            console.log(this.autoRefresh);
+        
+            if (this.intervalId) {
+                clearInterval(this.intervalId);
+            }
 
-      observe: {
-        datetime: 'createMoment',
-        format: 'createMoment',
-        formats: 'createMoment',
-        fromNow: 'createMoment',
-        lang: 'createMoment',
-        noSuffix: 'createMoment',
-        strict: 'createMoment',
-        unixOffset: 'createMoment',
-        unixTimestamp: 'createMoment',
-        utc: 'createMoment'
-      },
+            if (this.autoRefresh === '') {
+                this.autoRefresh = this.defaultAutoRefreshRate;
+            }
+            else if (this.autoRefresh > 0) {
+                this.intervalId = setInterval(this.refresh.bind(this), this.autoRefresh * 1000);
+            }
+        },
 
-      /**
-       * Value that the autoRefresh property should be set to when its
-       * corresponding attribute is used as a boolean (no period specified).
-       *
-       * @property defaultAutoRefreshRate
-       * @type int
-       */
-      defaultAutoRefreshRate: 60,
+        createMoment: function() {
+            if (!this._afterReady) {
+                return;
+            }
+            
+            if (this.unixOffset) {
+                this.moment = moment(this.unixOffset);
+            }
+            else if (this.unixTimestamp) {
+                this.moment = moment.unix(this.unixTimestamp);
+            }
+            else {
+                var fn = this.utc ? moment.utc : moment;
+                this.moment = fn(this.datetime || undefined, this.format || ((this.formats && this.formats.length) ? this.formats : undefined), this.lang || undefined, this.strict || undefined);
+            }
+        },
 
-      intervalId: 0,
+        momentChanged: function() {
+            if (!this._afterReady) {
+                return;
+            }
+            
+            this.refresh();
+        },
 
-      moment: {},
-
-      autoRefreshChanged: function() {
-        if (this.intervalId) {
-          clearInterval(this.intervalId);
+        /**
+        * Updates the text content of this at-carbon-moment.
+        *
+        * @method refresh
+        */
+        refresh: function() {
+            this.$.calculatedTime.innerText = (this.fromNow) ? this.moment.fromNow(this.noSuffix) : this.moment.format();
         }
-
-        if (this.autoRefresh === '') {
-          this.autoRefresh = this.defaultAutoRefreshRate;
-        }
-        else if (this.autoRefresh > 0) {
-          this.intervalId = setInterval(this.refresh.bind(this), this.autoRefresh * 1000);
-        }
-      },
-
-      created: function() {
-        this.formats = [];
-      },
-
-      createMoment: function() {
-        if (this.unixOffset) {
-          this.moment = moment(this.unixOffset);
-        }
-        else if (this.unixTimestamp) {
-          this.moment = moment.unix(this.unixTimestamp);
-        }
-        else {
-          var fn = this.utc ? moment.utc : moment;
-          this.moment = fn(this.datetime || undefined, this.format || ((this.formats && this.formats.length) ? this.formats : undefined), this.lang || undefined, this.strict || undefined);
-        }
-      },
-
-      momentChanged: function() {
-        this.refresh();
-      },
-
-      ready: function() {
-        this.createMoment();
-      },
-
-      /**
-       * Updates the text content of this at-carbon-moment.
-       *
-       * @method refresh
-       */
-      refresh: function() {
-        this.innerText = (this.fromNow) ? this.moment.fromNow(this.noSuffix) : this.moment.format();
-      }
-
     });
 
-  </script>
-
-</polymer-element>
+</script>
