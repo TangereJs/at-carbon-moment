@@ -24,20 +24,20 @@
   
   <h2>Display</h2>
   <p>From now:</p>
-  <at-carbon-moment fromNow></at-carbon-moment>
-  <at-carbon-moment datetime="2014-06-05T20:40:26" fromNow></at-carbon-moment>
-  <at-carbon-moment datetime="2011-06-05T20:40:26" fromNow></at-carbon-moment>
-  <at-carbon-moment datetime="2017-06-05T20:40:26" fromNow></at-carbon-moment>
+  <at-carbon-moment from-now></at-carbon-moment>
+  <at-carbon-moment datetime="2014-06-05T20:40:26" from-now></at-carbon-moment>
+  <at-carbon-moment datetime="2011-06-05T20:40:26" from-now></at-carbon-moment>
+  <at-carbon-moment datetime="2017-06-05T20:40:26" from-now></at-carbon-moment>
 
   <p>From now with no suffix:</p>
-  <at-carbon-moment fromNow noSuffix></at-carbon-moment>
+  <at-carbon-moment from-now no-suffix></at-carbon-moment>
 
   <p>With auto refresh:</p>  
-  <at-carbon-moment fromNow autoRefresh></at-carbon-moment>
-  <at-carbon-moment datetime="2014-10-02T00:40:26" fromNow autoRefresh></at-carbon-moment>
+  <at-carbon-moment from-now auto-refresh></at-carbon-moment>
+  <at-carbon-moment datetime="2014-10-02T00:40:26" from-now auto-refresh></at-carbon-moment>
 
   <p>And a refresh rate of 1 second:</p>
-  <at-carbon-moment fromNow autoRefresh="1"></at-carbon-moment>
+  <at-carbon-moment from-now auto-refresh="1"></at-carbon-moment>
 
   <h2>Parsing</h2>
 
@@ -45,18 +45,18 @@
   <at-carbon-moment datetime="2012 juillet" format="YYYY MMM" lang="fr" strict></at-carbon-moment>
 
   <p>With an array of formats:</p>
-  <at-carbon-moment datetime="05-25-1995" formats="['YYYY-MM-DD','MM-DD-YYYY']" strict></at-carbon-moment>
+  <at-carbon-moment datetime="05-25-1995" formats="[ 'YYYY-MM-DD' , 'MM-DD-YYYY' ]" strict></at-carbon-moment>
 
   <p>All of the above in utc mode:</p>
   <at-carbon-moment utc></at-carbon-moment>
   <at-carbon-moment datetime="2012 juillet" format="YYYY MMM" lang="fr" strict utc></at-carbon-moment>
-  <at-carbon-moment datetime="05-25-1995" formats="['MM-DD-YYYY','YYYY-MM-DD']" strict utc></at-carbon-moment>
+  <at-carbon-moment datetime="05-25-1995" formats="[ 'MM-DD-YYYY' , 'YYYY-MM-DD' ]" strict utc></at-carbon-moment>
 
   <p>With a Unix Offset (milliseconds):</p>
-  <at-carbon-moment unixOffset="1318781876406" strict></at-carbon-moment>
+  <at-carbon-moment unix-offset="1318781876406" strict></at-carbon-moment>
 
   <p>With a Unix Timestamp (seconds):</p>
-  <at-carbon-moment unixTimestamp="1318781876.406" strict></at-carbon-moment>
+  <at-carbon-moment unix-timestamp="1318781876.406" strict></at-carbon-moment>
 
   <at-carbon-moment datetime="2013-01-01T00:00:00-13:00"></at-carbon-moment>
 

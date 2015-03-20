@@ -36,7 +36,8 @@ A Polymer wrapper for moment.js.
             */
             autoRefresh: {
                 type:Number,
-                value:0
+                value:0,
+                observe:'autoRefreshChanged'
             },
              /**
             * Value that the autoRefresh property should be set to when its
@@ -108,7 +109,6 @@ A Polymer wrapper for moment.js.
         },
         
         observers:{
-            'autoRefresh' : 'autoRefreshChanged',
             'moment.*' : 'momentChanged'
         },
         
@@ -122,8 +122,6 @@ A Polymer wrapper for moment.js.
                 return;
             }*/
             
-            console.log(this.autoRefresh);
-        
             if (this.intervalId) {
                 clearInterval(this.intervalId);
             }
