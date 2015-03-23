@@ -45,12 +45,13 @@
   <at-carbon-moment datetime="2012 juillet" format="YYYY MMM" lang="fr" strict></at-carbon-moment>
 
   <p>With an array of formats:</p>
-  <at-carbon-moment datetime="05-25-1995" formats="[ 'YYYY-MM-DD' , 'MM-DD-YYYY' ]" strict></at-carbon-moment>
+  <at-carbon-moment datetime="05-25-1995" formats='["YYYY-MM-DD", "MM-DD-YYYY"]' strict></at-carbon-moment>
 
   <p>All of the above in utc mode:</p>
   <at-carbon-moment utc></at-carbon-moment>
   <at-carbon-moment datetime="2012 juillet" format="YYYY MMM" lang="fr" strict utc></at-carbon-moment>
-  <at-carbon-moment datetime="05-25-1995" formats="[ 'MM-DD-YYYY' , 'YYYY-MM-DD' ]" strict utc></at-carbon-moment>
+  <at-carbon-moment datetime="05-25-1995" formats='["MM-DD-YYYY", "YYYY-MM-DD"]' strict utc></at-carbon-moment>
+    
 
   <p>With a Unix Offset (milliseconds):</p>
   <at-carbon-moment unix-offset="1318781876406" strict></at-carbon-moment>
