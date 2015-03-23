@@ -37,7 +37,7 @@ A Polymer wrapper for moment.js.
             autoRefresh: {
                 type:Number,
                 value:0,
-                observe:'autoRefreshChanged'
+                observer:'autoRefreshChanged'
             },
              /**
             * Value that the autoRefresh property should be set to when its
@@ -50,53 +50,53 @@ A Polymer wrapper for moment.js.
             datetime:{
                 type:String,
                 value:'',
-                observe:'createMoment'
+                observer:'createMoment'
             },
             format:{
                 type:String, 
                 value:'',
-                observe:'createMoment'
+                observer:'createMoment'
             },
             formats: {
                 type: Array,
                 value: [],
                 reflect: true,
-                observe:'createMoment'
+                observer:'createMoment'
             },
             fromNow: {
                 type:Boolean, 
                 value:false,
-                observe:'createMoment'
+                observer:'createMoment'
             },
             lang: {
                 type:String, 
                 value:'',
-                observe:'createMoment'
+                observer:'createMoment'
             },
             noSuffix: {
                 type:Boolean, 
                 value:false,
-                observe:'createMoment'
+                observer:'createMoment'
             },
             strict: {
                 type:Boolean, 
                 value:false,
-                observe:'createMoment'
+                observer:'createMoment'
             },
             unixOffset: {
                 type:Number, 
                 value:0,
-                observe:'createMoment'
+                observer:'createMoment'
             },
             unixTimestamp: {
                 type:Number, 
                 value:0,
-                observe:'createMoment'
+                observer:'createMoment'
             },
             utc: {
                 type:Boolean, 
                 value:false,
-                observe:'createMoment'
+                observer:'createMoment'
             },           
             intervalId: {
                 type:Number, 
@@ -118,9 +118,9 @@ A Polymer wrapper for moment.js.
         },
         
         autoRefreshChanged: function() {
-            /*if (!this._afterReady) {
+            if (!this._afterReady) {
                 return;
-            }*/
+            }
             
             if (this.intervalId) {
                 clearInterval(this.intervalId);
