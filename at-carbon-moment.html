@@ -114,6 +114,10 @@ A Polymer wrapper for moment.js.
         
         ready: function(){
             this._afterReady = true;
+            if(this.autoRefresh != 0){
+                this.autoRefreshChanged();
+            }
+            
             this.createMoment();
         },
         
