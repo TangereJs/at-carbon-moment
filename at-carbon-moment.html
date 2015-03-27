@@ -35,6 +35,12 @@ A Polymer wrapper for moment.js.
             * used.
             */
             autoRefresh: {
+                type:Boolean,
+                value:0,
+                observer:'autoRefreshChanged'
+            },
+            
+            autoRefreshRate: {
                 type:Number,
                 value:0,
                 observer:'autoRefreshChanged'
@@ -114,7 +120,10 @@ A Polymer wrapper for moment.js.
         
         ready: function(){
             this._afterReady = true;
-            if(this.autoRefresh != 0){
+            
+            console.log(this.autoRefresh);
+            
+            if(this.autoRefreshRate != 0 || this.autoRefresh){
                 this.autoRefreshChanged();
             }
             
@@ -130,11 +139,11 @@ A Polymer wrapper for moment.js.
                 clearInterval(this.intervalId);
             }
 
-            if (this.autoRefresh === '') {
-                this.autoRefresh = this.defaultAutoRefreshRate;
+            if (this.autoRefresh && this.autoRefreshRate === 0) {
+                this.autoRefreshRate = this.defaultAutoRefreshRate;
             }
-            else if (this.autoRefresh > 0) {
-                this.intervalId = setInterval(this.refresh.bind(this), this.autoRefresh * 1000);
+            else if (this.autoRefreshRate > 0) {
+                this.intervalId = setInterval(this.refresh.bind(this), this.autoRefreshRate * 1000);
             }
         },
 
