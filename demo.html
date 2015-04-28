@@ -40,6 +40,10 @@
   <p>And a refresh rate of 1 second:</p>
   <at-carbon-moment from-now auto-refresh-rate="1"></at-carbon-moment>
 
+    <p>Setting moment on button click:</p>
+    <at-carbon-moment datetime="2014-10-02T00:40:26" from-now auto-refresh id="carbonSetMoment"></at-carbon-moment>
+    <button id="btnSetMoment"> Set Moment </button>
+    
   <h2>Parsing</h2>
 
   <p>With a foreign language:</p>
@@ -62,7 +66,20 @@
 
   <at-carbon-moment datetime="2013-01-01T00:00:00-13:00"></at-carbon-moment>
 
-
-
+     <script>
+        HTMLImports.whenReady(function() {
+            var btnSetMoment = document.getElementById("btnSetMoment");
+            
+            var carbonSetMoment = document.getElementById("carbonSetMoment");
+            
+            btnSetMoment.addEventListener("click", function(){
+                var date = new Date();
+                carbonSetMoment.datetime = date.toUTCString();
+            });
+        });
+        
+        
+    </script>
+    
 </body>
 </html>
