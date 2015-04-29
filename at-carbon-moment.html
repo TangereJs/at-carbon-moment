@@ -112,8 +112,6 @@ A Polymer wrapper for moment.js.
         ready: function(){
             this._afterReady = true;
             
-            console.log(this.autoRefresh);
-            
             if(this.autoRefreshRate != 0 || this.autoRefresh){
                 this.autoRefreshChanged();
             }
@@ -169,7 +167,7 @@ A Polymer wrapper for moment.js.
         * @method refresh
         */
         refresh: function() {
-            this.$.calculatedTime.innerText = (this.fromNow) ? this.moment.fromNow(this.noSuffix) : this.moment.format();
+            this.$.calculatedTime.textContent = (this.fromNow) ? this.moment.fromNow(this.noSuffix) : this.moment.format();
         }
     });
 
