@@ -1,5 +1,6 @@
 {
   "name": "at-carbon-moment",
+  "version": "1.0.0.0",
   "private": true,
   "dependencies": {
 	"moment": "TangereJs/moment#master"
