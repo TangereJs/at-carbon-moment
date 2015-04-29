@@ -20,7 +20,6 @@ A Polymer wrapper for moment.js.
     </style>
     <template>
         <at-core-theme></at-core-theme>
-        <div id="calculatedTime"></div>
     </template>
 </dom-module>
 <script>
@@ -167,7 +166,7 @@ A Polymer wrapper for moment.js.
         * @method refresh
         */
         refresh: function() {
-            this.$.calculatedTime.textContent = (this.fromNow) ? this.moment.fromNow(this.noSuffix) : this.moment.format();
+            this.textContent = (this.fromNow) ? this.moment.fromNow(this.noSuffix) : this.moment.format();
         }
     });
 
