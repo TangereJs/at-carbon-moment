@@ -91,6 +91,10 @@ A Polymer wrapper for moment.js.
             utc: {
                 type:Boolean, 
                 value:false
+            },
+            ago: {
+                type:Boolean, 
+                value:false
             },           
             intervalId: {
                 type:Number, 
@@ -103,7 +107,7 @@ A Polymer wrapper for moment.js.
         },
         
         observers: [
-            'createMoment(datetime, format, formats, fromNow, language, noSuffix, strict, unixOffset, unixTimestamp, utc)',
+            'createMoment(datetime, format, formats, fromNow, language, noSuffix, strict, unixOffset, unixTimestamp, utc, ago)',
             'autoRefreshChanged(autoRefresh, autoRefreshRate)',
             'momentChanged(moment.*)'
         ],
@@ -166,7 +170,15 @@ A Polymer wrapper for moment.js.
         * @method refresh
         */
         refresh: function() {
-            this.textContent = (this.fromNow) ? this.moment.fromNow(this.noSuffix) : this.moment.format();
+            if(this.ago && (this.moment.toISOString() > new Date().toISOString()))
+            {
+                this.textContent = "now";
+            }
+            else{
+                this.textContent = (this.fromNow) ? this.moment.fromNow(this.noSuffix) : this.moment.format();
+            }
+            
+            
         }
     });
 
