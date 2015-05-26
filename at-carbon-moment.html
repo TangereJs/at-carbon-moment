@@ -170,15 +170,19 @@ A Polymer wrapper for moment.js.
         * @method refresh
         */
         refresh: function() {
-            if(this.ago && (this.moment.toISOString() > new Date().toISOString()))
+            if(this.datetime.length > 0)
             {
-                this.textContent = "now";
+                if(this.ago && (this.moment.toISOString() > new Date().toISOString()))
+                {   
+                    this.textContent = "now";
+                }
+                else{
+                    this.textContent = (this.fromNow) ? this.moment.fromNow(this.noSuffix) : this.moment.format();
+                }
             }
-            else{
-                this.textContent = (this.fromNow) ? this.moment.fromNow(this.noSuffix) : this.moment.format();
-            }
-            
-            
+//            else{
+//                this.textContent = "";
+//            }
         }
     });
 
