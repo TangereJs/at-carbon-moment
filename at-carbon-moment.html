@@ -172,7 +172,13 @@ A Polymer wrapper for moment.js.
         refresh: function() {
             if(this.datetime.length > 0)
             {
-                if(this.ago && (this.moment.toISOString() > new Date().toISOString()))
+                //Treated as a null value || DateTime.MinValue()
+                //Therefore string displaying moment should be empty
+                if(this.datetime.indexOf("0001-01-01T") == 0)
+                {
+                    this.textContent = "";
+                }                
+                else if(this.ago && (this.moment.toISOString() > new Date().toISOString()))
                 {   
                     this.textContent = "now";
                 }
