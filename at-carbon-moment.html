@@ -1,17 +1,6 @@
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="momentjs-import.html"/>
+<link rel="import" href="../tangere/tangere.html">
 <link rel="import" href="../at-core-theme/at-core-theme.html">
 
-<!--
-A Polymer wrapper for moment.js.
-
-##### Example
-
-    <at-carbon-moment datetime="2014-06-05T20:40:26" fromNow></at-carbon-moment>
-
-@element at-carbon-moment
-@homepage http://cletusw.github.io/at-carbon-moment
--->
 <dom-module id="at-carbon-moment">
     <style>
         :host {
@@ -112,7 +101,10 @@ A Polymer wrapper for moment.js.
             'momentChanged(moment.*)'
         ],
         
-        ready: function(){
+        ready: function () {
+
+          this.language = Tangere.session.user.lang || this.language;
+
             this._afterReady = true;
             
             if(this.autoRefreshRate != 0 || this.autoRefresh){
@@ -150,9 +142,9 @@ A Polymer wrapper for moment.js.
             else if (this.unixTimestamp) {
                 this.moment = moment.unix(this.unixTimestamp);
             }
-            else {
-                var fn = this.utc ? moment.utc : moment;
-                this.moment = fn(this.datetime || undefined, this.format || ((this.formats && this.formats.length) ? this.formats : undefined), this.language || undefined, this.strict || undefined);
+            else {              
+              var fn = this.utc ? moment.utc : moment;              
+              this.moment = fn(this.datetime || undefined, this.format || ((this.formats && this.formats.length) ? this.formats : undefined), this.language || undefined, this.strict || undefined);              
             }
         },
 
