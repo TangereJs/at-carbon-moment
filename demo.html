@@ -1,28 +1,30 @@
 <!doctype html>
 <html>
+
 <head>
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <title>at-carbon-moment Demo</title>
 
   <script src="../webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="../polymer/polymer.html" />
-    
+
   <link rel="import" href="at-carbon-moment.html">
 
   <style>
     p {
-        font-style: italic;
-        font-weight: bold;
-        margin:16px 0px 2px 0px !important;
+      font-style: italic;
+      font-weight: bold;
+      margin: 16px 0px 2px 0px !important;
     }
   </style>
 
 </head>
+
 <body>
 
   <p>An example of using <code>&lt;at-carbon-moment></code>:</p>
   <at-carbon-moment></at-carbon-moment>
-  
+
   <h2>Display</h2>
   <p>From now:</p>
   <at-carbon-moment from-now></at-carbon-moment>
@@ -33,23 +35,23 @@
   <p>From now with no suffix:</p>
   <at-carbon-moment from-now no-suffix></at-carbon-moment>
 
-  <p>With auto refresh:</p>  
+  <p>With auto refresh:</p>
   <at-carbon-moment from-now auto-refresh></at-carbon-moment>
   <at-carbon-moment datetime="2014-10-02T00:40:26" from-now auto-refresh ago></at-carbon-moment>
 
   <p>And a refresh rate of 1 second:</p>
   <at-carbon-moment from-now auto-refresh-rate="1"></at-carbon-moment>
 
-    <p>Setting moment on button click:</p>
-    <at-carbon-moment datetime="2014-10-02T00:40:26" from-now auto-refresh id="carbonSetMoment"></at-carbon-moment>
-    <button id="btnSetMoment"> Set Moment </button>
-    
+  <p>Setting moment on button click:</p>
+  <at-carbon-moment datetime="2014-10-02T00:40:26" from-now auto-refresh id="carbonSetMoment"></at-carbon-moment>
+  <button id="btnSetMoment"> Set Moment </button>
+
   <p>Replaces dates in future with now:</p>
   <at-carbon-moment datetime="2016-10-02T00:40:26" ago></at-carbon-moment>
-    
+
   <p>0001-01-01T19:00:00Z as NULL:</p>
   <at-carbon-moment datetime="0001-01-01T19:00:00" from-now></at-carbon-moment>
-    
+
   <h2>Parsing</h2>
 
   <p>With an array of formats:</p>
@@ -59,30 +61,37 @@
   <at-carbon-moment utc></at-carbon-moment>
   <at-carbon-moment datetime="2012 juillet" format="YYYY MMM" language="fr" strict utc></at-carbon-moment>
   <at-carbon-moment datetime="05-25-1995" formats='["MM-DD-YYYY", "YYYY-MM-DD"]' strict utc></at-carbon-moment>
-    
+
 
   <p>With a Unix Offset (milliseconds):</p>
   <at-carbon-moment unix-offset="1318781876406" strict></at-carbon-moment>
 
   <p>With a Unix Timestamp (seconds):</p>
   <at-carbon-moment unix-timestamp="1318781876.406" strict></at-carbon-moment>
-
   <at-carbon-moment datetime="2013-01-01T00:00:00-13:00"></at-carbon-moment>
 
-     <script>
-        HTMLImports.whenReady(function() {
-            var btnSetMoment = document.getElementById("btnSetMoment");
-            
-            var carbonSetMoment = document.getElementById("carbonSetMoment");
-            
-            btnSetMoment.addEventListener("click", function(){
-                var date = new Date();
-                carbonSetMoment.datetime = date.toUTCString();
-            });
-        });
-        
-        
-    </script>
-    
+  <p>In the near future</p>
+  <at-carbon-moment id="future" from-now ago></at-carbon-moment>
+
+  <script>
+    HTMLImports.whenReady(function () {
+      var btnSetMoment = document.getElementById("btnSetMoment");
+
+      var carbonSetMoment = document.getElementById("carbonSetMoment");
+
+      btnSetMoment.addEventListener("click", function () {
+        var date = new Date();
+        carbonSetMoment.datetime = date.toUTCString();
+      });
+
+      var future = document.getElementById("future");
+      var t = new Date();
+      t.setSeconds(t.getSeconds() + 600);
+      future.datetime =t.toUTCString();
+
+    });
+  </script>
+
 </body>
+
 </html>
