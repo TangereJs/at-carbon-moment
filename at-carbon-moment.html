@@ -172,7 +172,7 @@
                 }                
                 else if(this.ago && (this.moment.toISOString() > new Date().toISOString()))
                 {   
-                    this.textContent = "now";
+                    this.textContent = "";
                 }
                 else{
                     this.textContent = (this.fromNow) ? this.moment.fromNow(this.noSuffix) : this.moment.format();
