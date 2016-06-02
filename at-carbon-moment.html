@@ -1,187 +1,175 @@
 <link rel="import" href="../tangere/tangere.html">
-<link rel="import" href="../at-core-theme/at-core-theme.html">
 
 <dom-module id="at-carbon-moment">
+  <template>
     <style>
-        :host {
-            display: block;
-        }
+      :host {
+        display: block;
+      }
     </style>
-    <template>
-        <at-core-theme></at-core-theme>
-    </template>
+  </template>
 </dom-module>
 <script>
-    Polymer({
-        is:'at-carbon-moment',
-        _scopeCssViaAttr: true,
-        properties:{
-            /**
-            * When greater than 0, specifies the time (in seconds) between
-            * automatic calls to the `refresh` method.
-            *
-            * When used as a boolean attribute, the defaultAutoRefreshRate is
-            * used.
-            */
-            autoRefresh: {
-                type:Boolean,
-                value:0
-            },
-            
-            autoRefreshRate: {
-                type:Number,
-                value:0
-            },
-             /**
-            * Value that the autoRefresh property should be set to when its
-            * corresponding attribute is used as a boolean (no period specified).
-            */
-            defaultAutoRefreshRate: {
-                type:Number, 
-                value:60
-            },
-            datetime:{
-                type:String,
-                value:''
-            },
-            format:{
-                type:String, 
-                value:''
-            },
-            formats: {
-                type: Array,
-                value: [],
-                reflect: true
-            },
-            fromNow: {
-                type:Boolean, 
-                value:false
-            },
-            language: {
-                type:String, 
-                value:''
-            },
-            noSuffix: {
-                type:Boolean, 
-                value:false
-            },
-            strict: {
-                type:Boolean, 
-                value:false
-            },
-            unixOffset: {
-                type:Number, 
-                value:0
-            },
-            unixTimestamp: {
-                type:Number, 
-                value:0
-            },
-            utc: {
-                type:Boolean, 
-                value:false
-            },
-            ago: {
-                type:Boolean, 
-                value:false
-            },           
-            intervalId: {
-                type:Number, 
-                value:0
-            },
-            moment: {
-                type:Object,
-                value:{}
-            }
-        },
-        
-        observers: [
-            'createMoment(datetime, format, formats, fromNow, language, noSuffix, strict, unixOffset, unixTimestamp, utc, ago)',
-            'autoRefreshChanged(autoRefresh, autoRefreshRate)',
-            'momentChanged(moment.*)'
-        ],
-        
-        ready: function () {
+  Polymer({
+    is: 'at-carbon-moment',
+    properties: {
+      /**
+       * When greater than 0, specifies the time (in seconds) between
+       * automatic calls to the `refresh` method.
+       *
+       * When used as a boolean attribute, the defaultAutoRefreshRate is
+       * used.
+       */
+      autoRefresh: {
+        type: Boolean,
+        value: 0
+      },
 
-          this.language = Tangere.session.user.lang || this.language;
+      autoRefreshRate: {
+        type: Number,
+        value: 0
+      },
+      /**
+       * Value that the autoRefresh property should be set to when its
+       * corresponding attribute is used as a boolean (no period specified).
+       */
+      defaultAutoRefreshRate: {
+        type: Number,
+        value: 60
+      },
+      datetime: {
+        type: String,
+        value: ''
+      },
+      format: {
+        type: String,
+        value: ''
+      },
+      formats: {
+        type: Array,
+        value: [],
+        reflect: true
+      },
+      fromNow: {
+        type: Boolean,
+        value: false
+      },
+      language: {
+        type: String,
+        value: ''
+      },
+      noSuffix: {
+        type: Boolean,
+        value: false
+      },
+      strict: {
+        type: Boolean,
+        value: false
+      },
+      unixOffset: {
+        type: Number,
+        value: 0
+      },
+      unixTimestamp: {
+        type: Number,
+        value: 0
+      },
+      utc: {
+        type: Boolean,
+        value: false
+      },
+      ago: {
+        type: Boolean,
+        value: false
+      },
+      intervalId: {
+        type: Number,
+        value: 0
+      },
+      moment: {
+        type: Object,
+        value: {}
+      }
+    },
 
-            this._afterReady = true;
-            
-            if(this.autoRefreshRate != 0 || this.autoRefresh){
-                this.autoRefreshChanged();
-            }
-            
-            this.createMoment();
-        },
-        
-        autoRefreshChanged: function() {
-            if (!this._afterReady) {
-                return;
-            }
-            
-            if (this.intervalId) {
-                clearInterval(this.intervalId);
-            }
+    observers: [
+      'createMoment(datetime, format, formats, fromNow, language, noSuffix, strict, unixOffset, unixTimestamp, utc, ago)',
+      'autoRefreshChanged(autoRefresh, autoRefreshRate)',
+      'momentChanged(moment.*)'
+    ],
 
-            if (this.autoRefresh && this.autoRefreshRate === 0) {
-                this.autoRefreshRate = this.defaultAutoRefreshRate;
-            }
-            else if (this.autoRefreshRate > 0) {
-                this.intervalId = setInterval(this.refresh.bind(this), this.autoRefreshRate * 1000);
-            }
-        },
+    ready: function() {
 
-        createMoment: function() {
-            if (!this._afterReady) {
-                return;
-            }
-            
-            if (this.unixOffset) {
-                this.moment = moment(this.unixOffset);
-            }
-            else if (this.unixTimestamp) {
-                this.moment = moment.unix(this.unixTimestamp);
-            }
-            else {              
-              var fn = this.utc ? moment.utc : moment;              
-              this.moment = fn(this.datetime || undefined, this.format || ((this.formats && this.formats.length) ? this.formats : undefined), this.language || undefined, this.strict || undefined);              
-            }
-        },
+      this.language = Tangere.session.user.lang || this.language;
 
-        momentChanged: function() {
-            if (!this._afterReady) {
-                return;
-            }
-            
-            this.refresh();
-        },
+      this._afterReady = true;
 
-        /**
-        * Updates the text content of this at-carbon-moment.
-        *
-        * @method refresh
-        */
-        refresh: function() {
-            if(this.datetime.length > 0)
-            {
-                //Treated as a null value || DateTime.MinValue()
-                //Therefore string displaying moment should be empty
-                if(this.datetime.indexOf("0001-01-01T") == 0)
-                {
-                    this.textContent = "";
-                }                
-                else if(this.ago && (this.moment.toISOString() > new Date().toISOString()))
-                {   
-                    this.textContent = "";
-                }
-                else{
-                    this.textContent = (this.fromNow) ? this.moment.fromNow(this.noSuffix) : this.moment.format();
-                }
-            }
-//            else{
-//                this.textContent = "";
-//            }
+      if (this.autoRefreshRate != 0 || this.autoRefresh) {
+        this.autoRefreshChanged();
+      }
+
+      this.createMoment();
+    },
+
+    autoRefreshChanged: function() {
+      if (!this._afterReady) {
+        return;
+      }
+
+      if (this.intervalId) {
+        clearInterval(this.intervalId);
+      }
+
+      if (this.autoRefresh && this.autoRefreshRate === 0) {
+        this.autoRefreshRate = this.defaultAutoRefreshRate;
+      } else if (this.autoRefreshRate > 0) {
+        this.intervalId = setInterval(this.refresh.bind(this), this.autoRefreshRate * 1000);
+      }
+    },
+
+    createMoment: function() {
+      if (!this._afterReady) {
+        return;
+      }
+
+      if (this.unixOffset) {
+        this.moment = moment(this.unixOffset);
+      } else if (this.unixTimestamp) {
+        this.moment = moment.unix(this.unixTimestamp);
+      } else {
+        var fn = this.utc ? moment.utc : moment;
+        this.moment = fn(this.datetime || undefined, this.format || ((this.formats && this.formats.length) ? this.formats : undefined), this.language || undefined, this.strict || undefined);
+      }
+    },
+
+    momentChanged: function() {
+      if (!this._afterReady) {
+        return;
+      }
+
+      this.refresh();
+    },
+
+    /**
+     * Updates the text content of this at-carbon-moment.
+     *
+     * @method refresh
+     */
+    refresh: function() {
+      if (this.datetime.length > 0) {
+        //Treated as a null value || DateTime.MinValue()
+        //Therefore string displaying moment should be empty
+        if (this.datetime.indexOf("0001-01-01T") == 0) {
+          this.textContent = "";
+        } else if (this.ago && (this.moment.toISOString() > new Date().toISOString())) {
+          this.textContent = "";
+        } else {
+          this.textContent = (this.fromNow) ? this.moment.fromNow(this.noSuffix) : this.moment.format();
         }
-    });
-
+      }
+      //            else{
+      //                this.textContent = "";
+      //            }
+    }
+  });
 </script>
