@@ -1,0 +1,2190 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <title>at-carbon-moment tests</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <link rel="import" href="../at-carbon-moment.html">
+  <link rel="import" href="../../iron-test-helpers/iron-test-helpers.html" />
+  </head>
+  <body>
+    <test-fixture id="initial">
+      <template>
+        <at-carbon-moment></at-carbon-moment>
+      </template>
+    </test-fixture>
+
+    <!-- 
+      autoRefresh fixtures 
+    -->
+    <test-fixture id="autoRefreshIsUndefined">
+      <template>
+        <at-carbon-moment auto-refresh="undefined"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshIsNull">
+      <template>
+        <at-carbon-moment auto-refresh="null"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshIsTrue">
+      <template>
+        <at-carbon-moment auto-refresh="true"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshIsFalse">
+      <template>
+        <at-carbon-moment auto-refresh="false"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshIs-42">
+      <template>
+        <at-carbon-moment auto-refresh="-42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshIs0">
+      <template>
+        <at-carbon-moment auto-refresh="0"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshIs42">
+      <template>
+        <at-carbon-moment auto-refresh="42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshIsEmpty">
+      <template>
+        <at-carbon-moment auto-refresh=""></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshIsLorem_ipsum">
+      <template>
+        <at-carbon-moment auto-refresh="lorem ipsum"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshIs{}">
+      <template>
+        <at-carbon-moment auto-refresh="{}"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshIs[]">
+      <template>
+        <at-carbon-moment auto-refresh="[]"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshIsFunction">
+      <template>
+        <at-carbon-moment auto-refresh="function f() { return undefined; }"></at-carbon-moment>
+      </template>
+    </test-fixture>
+
+    <!-- 
+      autoRefreshRate fixtures 
+    -->
+    <test-fixture id="autoRefreshRateIsUndefined">
+      <template>
+        <at-carbon-moment auto-refresh-rate="undefined"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshRateIsNull">
+      <template>
+        <at-carbon-moment auto-refresh-rate="null"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshRateIsTrue">
+      <template>
+        <at-carbon-moment auto-refresh-rate="true"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshRateIsFalse">
+      <template>
+        <at-carbon-moment auto-refresh-rate="false"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshRateIs-42">
+      <template>
+        <at-carbon-moment auto-refresh-rate="-42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshRateIs0">
+      <template>
+        <at-carbon-moment auto-refresh-rate="0"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshRateIs42">
+      <template>
+        <at-carbon-moment auto-refresh-rate="42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshRateIsEmpty">
+      <template>
+        <at-carbon-moment auto-refresh-rate=""></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshRateIsLorem_ipsum">
+      <template>
+        <at-carbon-moment auto-refresh-rate="lorem ipsum"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshRateIs{}">
+      <template>
+        <at-carbon-moment auto-refresh-rate="{}"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshRateIs[]">
+      <template>
+        <at-carbon-moment auto-refresh-rate="[]"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="autoRefreshRateIsFunction">
+      <template>
+        <at-carbon-moment auto-refresh-rate="function f() { return undefined; }"></at-carbon-moment>
+      </template>
+    </test-fixture>
+
+    <!-- 
+      defaultAutoRefreshRate fixtures 
+    -->
+    <test-fixture id="defaultAutoRefreshRateIsUndefined">
+      <template>
+        <at-carbon-moment default-auto-refresh-rate="undefined"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="defaultAutoRefreshRateIsNull">
+      <template>
+        <at-carbon-moment default-auto-refresh-rate="null"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="defaultAutoRefreshRateIsTrue">
+      <template>
+        <at-carbon-moment default-auto-refresh-rate="true"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="defaultAutoRefreshRateIsFalse">
+      <template>
+        <at-carbon-moment default-auto-refresh-rate="false"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="defaultAutoRefreshRateIs-42">
+      <template>
+        <at-carbon-moment default-auto-refresh-rate="-42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="defaultAutoRefreshRateIs0">
+      <template>
+        <at-carbon-moment default-auto-refresh-rate="0"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="defaultAutoRefreshRateIs42">
+      <template>
+        <at-carbon-moment default-auto-refresh-rate="42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="defaultAutoRefreshRateIsEmpty">
+      <template>
+        <at-carbon-moment default-auto-refresh-rate=""></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="defaultAutoRefreshRateIsLorem_ipsum">
+      <template>
+        <at-carbon-moment default-auto-refresh-rate="lorem ipsum"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="defaultAutoRefreshRateIs{}">
+      <template>
+        <at-carbon-moment default-auto-refresh-rate="{}"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="defaultAutoRefreshRateIs[]">
+      <template>
+        <at-carbon-moment default-auto-refresh-rate="[]"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="defaultAutoRefreshRateIsFunction">
+      <template>
+        <at-carbon-moment default-auto-refresh-rate="function f() { return undefined; }"></at-carbon-moment>
+      </template>
+    </test-fixture>
+
+    <!-- 
+      datetime fixtures 
+    -->
+    <test-fixture id="datetimeIsUndefined">
+      <template>
+        <at-carbon-moment datetime="undefined"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="datetimeIsNull">
+      <template>
+        <at-carbon-moment datetime="null"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="datetimeIsTrue">
+      <template>
+        <at-carbon-moment datetime="true"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="datetimeIsFalse">
+      <template>
+        <at-carbon-moment datetime="false"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="datetimeIs-42">
+      <template>
+        <at-carbon-moment datetime="-42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="datetimeIs0">
+      <template>
+        <at-carbon-moment datetime="0"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="datetimeIs42">
+      <template>
+        <at-carbon-moment datetime="42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="datetimeIsEmpty">
+      <template>
+        <at-carbon-moment datetime=""></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="datetimeIsLorem_ipsum">
+      <template>
+        <at-carbon-moment datetime="lorem ipsum"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="datetimeIs{}">
+      <template>
+        <at-carbon-moment datetime="{}"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="datetimeIs[]">
+      <template>
+        <at-carbon-moment datetime="[]"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="datetimeIsFunction">
+      <template>
+        <at-carbon-moment datetime="function f() { return undefined; }"></at-carbon-moment>
+      </template>
+    </test-fixture>
+
+    <!-- 
+      format fixtures 
+    -->
+    <test-fixture id="formatIsUndefined">
+      <template>
+        <at-carbon-moment format="undefined"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatIsNull">
+      <template>
+        <at-carbon-moment format="null"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatIsTrue">
+      <template>
+        <at-carbon-moment format="true"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatIsFalse">
+      <template>
+        <at-carbon-moment format="false"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatIs-42">
+      <template>
+        <at-carbon-moment format="-42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatIs0">
+      <template>
+        <at-carbon-moment format="0"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatIs42">
+      <template>
+        <at-carbon-moment format="42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatIsEmpty">
+      <template>
+        <at-carbon-moment format=""></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatIsLorem_ipsum">
+      <template>
+        <at-carbon-moment format="lorem ipsum"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatIs{}">
+      <template>
+        <at-carbon-moment format="{}"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatIs[]">
+      <template>
+        <at-carbon-moment format="[]"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatIsFunction">
+      <template>
+        <at-carbon-moment format="function f() { return undefined; }"></at-carbon-moment>
+      </template>
+    </test-fixture>
+
+    <!-- 
+      formats fixtures 
+    -->
+    <test-fixture id="formatsIsUndefined">
+      <template>
+        <at-carbon-moment formats="undefined"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatsIsNull">
+      <template>
+        <at-carbon-moment formats="null"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatsIsTrue">
+      <template>
+        <at-carbon-moment formats="true"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatsIsFalse">
+      <template>
+        <at-carbon-moment formats="false"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatsIs-42">
+      <template>
+        <at-carbon-moment formats="-42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatsIs0">
+      <template>
+        <at-carbon-moment formats="0"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatsIs42">
+      <template>
+        <at-carbon-moment formats="42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatsIsEmpty">
+      <template>
+        <at-carbon-moment formats=""></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatsIsLorem_ipsum">
+      <template>
+        <at-carbon-moment formats="lorem ipsum"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatsIs{}">
+      <template>
+        <at-carbon-moment formats="{}"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatsIs[]">
+      <template>
+        <at-carbon-moment formats="[]"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="formatsIsFunction">
+      <template>
+        <at-carbon-moment formats="function f() { return undefined; }"></at-carbon-moment>
+      </template>
+    </test-fixture>
+
+    <!-- 
+      fromNow fixtures 
+    -->
+    <test-fixture id="fromNowIsUndefined">
+      <template>
+        <at-carbon-moment from-now="undefined"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="fromNowIsNull">
+      <template>
+        <at-carbon-moment from-now="null"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="fromNowIsTrue">
+      <template>
+        <at-carbon-moment from-now="true"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="fromNowIsFalse">
+      <template>
+        <at-carbon-moment from-now="false"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="fromNowIs-42">
+      <template>
+        <at-carbon-moment from-now="-42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="fromNowIs0">
+      <template>
+        <at-carbon-moment from-now="0"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="fromNowIs42">
+      <template>
+        <at-carbon-moment from-now="42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="fromNowIsEmpty">
+      <template>
+        <at-carbon-moment from-now=""></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="fromNowIsLorem_ipsum">
+      <template>
+        <at-carbon-moment from-now="lorem ipsum"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="fromNowIs{}">
+      <template>
+        <at-carbon-moment from-now="{}"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="fromNowIs[]">
+      <template>
+        <at-carbon-moment from-now="[]"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="fromNowIsFunction">
+      <template>
+        <at-carbon-moment from-now="function f() { return undefined; }"></at-carbon-moment>
+      </template>
+    </test-fixture>
+
+    <!-- 
+      language fixtures 
+    -->
+    <test-fixture id="languageIsUndefined">
+      <template>
+        <at-carbon-moment language="undefined"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="languageIsNull">
+      <template>
+        <at-carbon-moment language="null"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="languageIsTrue">
+      <template>
+        <at-carbon-moment language="true"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="languageIsFalse">
+      <template>
+        <at-carbon-moment language="false"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="languageIs-42">
+      <template>
+        <at-carbon-moment language="-42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="languageIs0">
+      <template>
+        <at-carbon-moment language="0"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="languageIs42">
+      <template>
+        <at-carbon-moment language="42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="languageIsEmpty">
+      <template>
+        <at-carbon-moment language=""></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="languageIsLorem_ipsum">
+      <template>
+        <at-carbon-moment language="lorem ipsum"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="languageIs{}">
+      <template>
+        <at-carbon-moment language="{}"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="languageIs[]">
+      <template>
+        <at-carbon-moment language="[]"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="languageIsFunction">
+      <template>
+        <at-carbon-moment language="function f() { return undefined; }"></at-carbon-moment>
+      </template>
+    </test-fixture>
+
+    <!-- 
+      noSuffix fixtures 
+    -->
+    <test-fixture id="noSuffixIsUndefined">
+      <template>
+        <at-carbon-moment no-suffix="undefined"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="noSuffixIsNull">
+      <template>
+        <at-carbon-moment no-suffix="null"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="noSuffixIsTrue">
+      <template>
+        <at-carbon-moment no-suffix="true"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="noSuffixIsFalse">
+      <template>
+        <at-carbon-moment no-suffix="false"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="noSuffixIs-42">
+      <template>
+        <at-carbon-moment no-suffix="-42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="noSuffixIs0">
+      <template>
+        <at-carbon-moment no-suffix="0"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="noSuffixIs42">
+      <template>
+        <at-carbon-moment no-suffix="42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="noSuffixIsEmpty">
+      <template>
+        <at-carbon-moment no-suffix=""></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="noSuffixIsLorem_ipsum">
+      <template>
+        <at-carbon-moment no-suffix="lorem ipsum"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="noSuffixIs{}">
+      <template>
+        <at-carbon-moment no-suffix="{}"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="noSuffixIs[]">
+      <template>
+        <at-carbon-moment no-suffix="[]"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="noSuffixIsFunction">
+      <template>
+        <at-carbon-moment no-suffix="function f() { return undefined; }"></at-carbon-moment>
+      </template>
+    </test-fixture>
+
+    <!-- 
+      strict fixtures 
+    -->
+    <test-fixture id="strictIsUndefined">
+      <template>
+        <at-carbon-moment strict="undefined"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="strictIsNull">
+      <template>
+        <at-carbon-moment strict="null"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="strictIsTrue">
+      <template>
+        <at-carbon-moment strict="true"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="strictIsFalse">
+      <template>
+        <at-carbon-moment strict="false"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="strictIs-42">
+      <template>
+        <at-carbon-moment strict="-42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="strictIs0">
+      <template>
+        <at-carbon-moment strict="0"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="strictIs42">
+      <template>
+        <at-carbon-moment strict="42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="strictIsEmpty">
+      <template>
+        <at-carbon-moment strict=""></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="strictIsLorem_ipsum">
+      <template>
+        <at-carbon-moment strict="lorem ipsum"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="strictIs{}">
+      <template>
+        <at-carbon-moment strict="{}"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="strictIs[]">
+      <template>
+        <at-carbon-moment strict="[]"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="strictIsFunction">
+      <template>
+        <at-carbon-moment strict="function f() { return undefined; }"></at-carbon-moment>
+      </template>
+    </test-fixture>
+
+    <!-- 
+      unixOffset fixtures 
+    -->
+    <test-fixture id="unixOffsetIsUndefined">
+      <template>
+        <at-carbon-moment unix-offset="undefined"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixOffsetIsNull">
+      <template>
+        <at-carbon-moment unix-offset="null"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixOffsetIsTrue">
+      <template>
+        <at-carbon-moment unix-offset="true"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixOffsetIsFalse">
+      <template>
+        <at-carbon-moment unix-offset="false"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixOffsetIs-42">
+      <template>
+        <at-carbon-moment unix-offset="-42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixOffsetIs0">
+      <template>
+        <at-carbon-moment unix-offset="0"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixOffsetIs42">
+      <template>
+        <at-carbon-moment unix-offset="42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixOffsetIsEmpty">
+      <template>
+        <at-carbon-moment unix-offset=""></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixOffsetIsLorem_ipsum">
+      <template>
+        <at-carbon-moment unix-offset="lorem ipsum"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixOffsetIs{}">
+      <template>
+        <at-carbon-moment unix-offset="{}"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixOffsetIs[]">
+      <template>
+        <at-carbon-moment unix-offset="[]"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixOffsetIsFunction">
+      <template>
+        <at-carbon-moment unix-offset="function f() { return undefined; }"></at-carbon-moment>
+      </template>
+    </test-fixture>
+
+    <!-- 
+      unixTimestamp fixtures 
+    -->
+    <test-fixture id="unixTimestampIsUndefined">
+      <template>
+        <at-carbon-moment unix-timestamp="undefined"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixTimestampIsNull">
+      <template>
+        <at-carbon-moment unix-timestamp="null"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixTimestampIsTrue">
+      <template>
+        <at-carbon-moment unix-timestamp="true"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixTimestampIsFalse">
+      <template>
+        <at-carbon-moment unix-timestamp="false"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixTimestampIs-42">
+      <template>
+        <at-carbon-moment unix-timestamp="-42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixTimestampIs0">
+      <template>
+        <at-carbon-moment unix-timestamp="0"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixTimestampIs42">
+      <template>
+        <at-carbon-moment unix-timestamp="42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixTimestampIsEmpty">
+      <template>
+        <at-carbon-moment unix-timestamp=""></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixTimestampIsLorem_ipsum">
+      <template>
+        <at-carbon-moment unix-timestamp="lorem ipsum"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixTimestampIs{}">
+      <template>
+        <at-carbon-moment unix-timestamp="{}"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixTimestampIs[]">
+      <template>
+        <at-carbon-moment unix-timestamp="[]"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="unixTimestampIsFunction">
+      <template>
+        <at-carbon-moment unix-timestamp="function f() { return undefined; }"></at-carbon-moment>
+      </template>
+    </test-fixture>
+
+    <!-- 
+      utc fixtures 
+    -->
+    <test-fixture id="utcIsUndefined">
+      <template>
+        <at-carbon-moment utc="undefined"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="utcIsNull">
+      <template>
+        <at-carbon-moment utc="null"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="utcIsTrue">
+      <template>
+        <at-carbon-moment utc="true"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="utcIsFalse">
+      <template>
+        <at-carbon-moment utc="false"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="utcIs-42">
+      <template>
+        <at-carbon-moment utc="-42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="utcIs0">
+      <template>
+        <at-carbon-moment utc="0"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="utcIs42">
+      <template>
+        <at-carbon-moment utc="42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="utcIsEmpty">
+      <template>
+        <at-carbon-moment utc=""></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="utcIsLorem_ipsum">
+      <template>
+        <at-carbon-moment utc="lorem ipsum"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="utcIs{}">
+      <template>
+        <at-carbon-moment utc="{}"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="utcIs[]">
+      <template>
+        <at-carbon-moment utc="[]"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="utcIsFunction">
+      <template>
+        <at-carbon-moment utc="function f() { return undefined; }"></at-carbon-moment>
+      </template>
+    </test-fixture>
+
+    <!-- 
+      ago fixtures 
+    -->
+    <test-fixture id="agoIsUndefined">
+      <template>
+        <at-carbon-moment ago="undefined"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="agoIsNull">
+      <template>
+        <at-carbon-moment ago="null"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="agoIsTrue">
+      <template>
+        <at-carbon-moment ago="true"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="agoIsFalse">
+      <template>
+        <at-carbon-moment ago="false"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="agoIs-42">
+      <template>
+        <at-carbon-moment ago="-42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="agoIs0">
+      <template>
+        <at-carbon-moment ago="0"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="agoIs42">
+      <template>
+        <at-carbon-moment ago="42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="agoIsEmpty">
+      <template>
+        <at-carbon-moment ago=""></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="agoIsLorem_ipsum">
+      <template>
+        <at-carbon-moment ago="lorem ipsum"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="agoIs{}">
+      <template>
+        <at-carbon-moment ago="{}"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="agoIs[]">
+      <template>
+        <at-carbon-moment ago="[]"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="agoIsFunction">
+      <template>
+        <at-carbon-moment ago="function f() { return undefined; }"></at-carbon-moment>
+      </template>
+    </test-fixture>
+
+    <!-- 
+      intervalId fixtures 
+    -->
+    <test-fixture id="intervalIdIsUndefined">
+      <template>
+        <at-carbon-moment interval-id="undefined"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="intervalIdIsNull">
+      <template>
+        <at-carbon-moment interval-id="null"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="intervalIdIsTrue">
+      <template>
+        <at-carbon-moment interval-id="true"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="intervalIdIsFalse">
+      <template>
+        <at-carbon-moment interval-id="false"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="intervalIdIs-42">
+      <template>
+        <at-carbon-moment interval-id="-42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="intervalIdIs0">
+      <template>
+        <at-carbon-moment interval-id="0"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="intervalIdIs42">
+      <template>
+        <at-carbon-moment interval-id="42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="intervalIdIsEmpty">
+      <template>
+        <at-carbon-moment interval-id=""></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="intervalIdIsLorem_ipsum">
+      <template>
+        <at-carbon-moment interval-id="lorem ipsum"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="intervalIdIs{}">
+      <template>
+        <at-carbon-moment interval-id="{}"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="intervalIdIs[]">
+      <template>
+        <at-carbon-moment interval-id="[]"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="intervalIdIsFunction">
+      <template>
+        <at-carbon-moment interval-id="function f() { return undefined; }"></at-carbon-moment>
+      </template>
+    </test-fixture>
+
+    <!-- 
+      moment fixtures 
+    -->
+    <test-fixture id="momentIsUndefined">
+      <template>
+        <at-carbon-moment moment="undefined"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="momentIsNull">
+      <template>
+        <at-carbon-moment moment="null"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="momentIsTrue">
+      <template>
+        <at-carbon-moment moment="true"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="momentIsFalse">
+      <template>
+        <at-carbon-moment moment="false"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="momentIs-42">
+      <template>
+        <at-carbon-moment moment="-42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="momentIs0">
+      <template>
+        <at-carbon-moment moment="0"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="momentIs42">
+      <template>
+        <at-carbon-moment moment="42"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="momentIsEmpty">
+      <template>
+        <at-carbon-moment moment=""></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="momentIsLorem_ipsum">
+      <template>
+        <at-carbon-moment moment="lorem ipsum"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="momentIs{}">
+      <template>
+        <at-carbon-moment moment="{}"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="momentIs[]">
+      <template>
+        <at-carbon-moment moment="[]"></at-carbon-moment>
+      </template>
+    </test-fixture>
+    <test-fixture id="momentIsFunction">
+      <template>
+        <at-carbon-moment moment="function f() { return undefined; }"></at-carbon-moment>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="propertyTests">
+      <template>
+        <at-carbon-moment></at-carbon-moment>
+      </template>
+    </test-fixture>
+    
+  <script>
+    var itemViewInitVal = '<div class="item-container at-carbon-moment"><at-carbon-icon icon="{{icon}}" class="icon-class at-carbon-moment"></at-carbon-icon><span class="title-class at-carbon-moment">{{title}}</span></div>';
+
+    suite('initial value tests', function() {
+      test('initial value', function() {
+        var elt = fixture('initial');
+
+        assert.equal(elt.autoRefresh, 0);
+        assert.equal(elt.autoRefreshRate, 0);
+        assert.equal(elt.defaultAutoRefreshRate, 60);
+        assert.equal(elt.datetime, '');
+        assert.equal(elt.format, '');
+        assert.deepEqual(elt.formats, []);
+        assert.equal(elt.fromNow, false);
+        assert.equal(elt.language, '');
+        assert.equal(elt.noSuffix, false);
+        assert.equal(elt.strict, false);
+        assert.equal(elt.unixOffset, 0);
+        assert.equal(elt.unixTimestamp, 0);
+        assert.equal(elt.utc, false);
+        assert.equal(elt.ago, false);
+        assert.equal(elt.intervalId, 0);
+        assert.deepEqual(elt.moment, elt.moment);
+      });
+    });
+
+    // 
+    // autoRefresh attribute tests
+    // 
+    suite("autoRefresh attribute tests", function() {
+      test('autoRefresh is undefined', function() {
+        var elt = fixture('autoRefreshIsUndefined');
+
+        assert.equal(elt.autoRefresh, true);
+        assert.equal(elt.autoRefreshRate, 0);
+        assert.equal(elt.defaultAutoRefreshRate, 60);
+        assert.equal(elt.datetime, '');
+        assert.equal(elt.format, '');
+        assert.deepEqual(elt.formats, []);
+        assert.equal(elt.fromNow, false);
+        assert.equal(elt.language, '');
+        assert.equal(elt.noSuffix, false);
+        assert.equal(elt.strict, false);
+        assert.equal(elt.unixOffset, 0);
+        assert.equal(elt.unixTimestamp, 0);
+        assert.equal(elt.utc, false);
+        assert.equal(elt.ago, false);
+        assert.equal(elt.intervalId, 0);
+        assert.deepEqual(elt.moment, elt.moment);
+      });
+
+      test('autoRefresh is null', function() {
+        var elt = fixture('autoRefreshIsNull');
+
+        assert.equal(elt.autoRefresh, true);
+        assert.equal(elt.autoRefreshRate, 0);
+        assert.equal(elt.defaultAutoRefreshRate, 60);
+        assert.equal(elt.datetime, '');
+        assert.equal(elt.format, '');
+        assert.deepEqual(elt.formats, []);
+        assert.equal(elt.fromNow, false);
+        assert.equal(elt.language, '');
+        assert.equal(elt.noSuffix, false);
+        assert.equal(elt.strict, false);
+        assert.equal(elt.unixOffset, 0);
+        assert.equal(elt.unixTimestamp, 0);
+        assert.equal(elt.utc, false);
+        assert.equal(elt.ago, false);
+        assert.equal(elt.intervalId, 0);
+        assert.deepEqual(elt.moment, elt.moment);
+      });
+
+      test('autoRefresh is true', function() {
+        var elt = fixture('autoRefreshIsTrue');
+
+        assert.equal(elt.autoRefresh, true);
+        assert.equal(elt.autoRefreshRate, 0);
+        assert.equal(elt.defaultAutoRefreshRate, 60);
+        assert.equal(elt.datetime, '');
+        assert.equal(elt.format, '');
+        assert.deepEqual(elt.formats, []);
+        assert.equal(elt.fromNow, false);
+        assert.equal(elt.language, '');
+        assert.equal(elt.noSuffix, false);
+        assert.equal(elt.strict, false);
+        assert.equal(elt.unixOffset, 0);
+        assert.equal(elt.unixTimestamp, 0);
+        assert.equal(elt.utc, false);
+        assert.equal(elt.ago, false);
+        assert.equal(elt.intervalId, 0);
+        assert.deepEqual(elt.moment, elt.moment);
+      });
+
+      test('autoRefresh is false', function() {
+        var elt = fixture('autoRefreshIsFalse');
+
+        assert.equal(elt.autoRefresh, true);
+        assert.equal(elt.autoRefreshRate, 0);
+        assert.equal(elt.defaultAutoRefreshRate, 60);
+        assert.equal(elt.datetime, '');
+        assert.equal(elt.format, '');
+        assert.deepEqual(elt.formats, []);
+        assert.equal(elt.fromNow, false);
+        assert.equal(elt.language, '');
+        assert.equal(elt.noSuffix, false);
+        assert.equal(elt.strict, false);
+        assert.equal(elt.unixOffset, 0);
+        assert.equal(elt.unixTimestamp, 0);
+        assert.equal(elt.utc, false);
+        assert.equal(elt.ago, false);
+        assert.equal(elt.intervalId, 0);
+        assert.deepEqual(elt.moment, elt.moment);
+      });
+
+      test('autoRefresh is -42', function() {
+        var elt = fixture('autoRefreshIs-42');
+
+        assert.equal(elt.autoRefresh, true);
+        assert.equal(elt.autoRefreshRate, 0);
+        assert.equal(elt.defaultAutoRefreshRate, 60);
+        assert.equal(elt.datetime, '');
+        assert.equal(elt.format, '');
+        assert.deepEqual(elt.formats, []);
+        assert.equal(elt.fromNow, false);
+        assert.equal(elt.language, '');
+        assert.equal(elt.noSuffix, false);
+        assert.equal(elt.strict, false);
+        assert.equal(elt.unixOffset, 0);
+        assert.equal(elt.unixTimestamp, 0);
+        assert.equal(elt.utc, false);
+        assert.equal(elt.ago, false);
+        assert.equal(elt.intervalId, 0);
+        assert.deepEqual(elt.moment, elt.moment);
+      });
+
+      test('autoRefresh is 0', function() {
+        var elt = fixture('autoRefreshIs0');
+
+        assert.equal(elt.autoRefresh, true);
+        assert.equal(elt.autoRefreshRate, 0);
+        assert.equal(elt.defaultAutoRefreshRate, 60);
+        assert.equal(elt.datetime, '');
+        assert.equal(elt.format, '');
+        assert.deepEqual(elt.formats, []);
+        assert.equal(elt.fromNow, false);
+        assert.equal(elt.language, '');
+        assert.equal(elt.noSuffix, false);
+        assert.equal(elt.strict, false);
+        assert.equal(elt.unixOffset, 0);
+        assert.equal(elt.unixTimestamp, 0);
+        assert.equal(elt.utc, false);
+        assert.equal(elt.ago, false);
+        assert.equal(elt.intervalId, 0);
+        assert.deepEqual(elt.moment, elt.moment);
+      });
+
+      test('autoRefresh is 42', function() {
+        var elt = fixture('autoRefreshIs42');
+
+        assert.equal(elt.autoRefresh, true);
+        assert.equal(elt.autoRefreshRate, 0);
+        assert.equal(elt.defaultAutoRefreshRate, 60);
+        assert.equal(elt.datetime, '');
+        assert.equal(elt.format, '');
+        assert.deepEqual(elt.formats, []);
+        assert.equal(elt.fromNow, false);
+        assert.equal(elt.language, '');
+        assert.equal(elt.noSuffix, false);
+        assert.equal(elt.strict, false);
+        assert.equal(elt.unixOffset, 0);
+        assert.equal(elt.unixTimestamp, 0);
+        assert.equal(elt.utc, false);
+        assert.equal(elt.ago, false);
+        assert.equal(elt.intervalId, 0);
+        assert.deepEqual(elt.moment, elt.moment);
+      });
+
+      test('autoRefresh is empty', function() {
+        var elt = fixture('autoRefreshIsEmpty');
+
+        assert.equal(elt.autoRefresh, true);
+        assert.equal(elt.autoRefreshRate, 0);
+        assert.equal(elt.defaultAutoRefreshRate, 60);
+        assert.equal(elt.datetime, '');
+        assert.equal(elt.format, '');
+        assert.deepEqual(elt.formats, []);
+        assert.equal(elt.fromNow, false);
+        assert.equal(elt.language, '');
+        assert.equal(elt.noSuffix, false);
+        assert.equal(elt.strict, false);
+        assert.equal(elt.unixOffset, 0);
+        assert.equal(elt.unixTimestamp, 0);
+        assert.equal(elt.utc, false);
+        assert.equal(elt.ago, false);
+        assert.equal(elt.intervalId, 0);
+        assert.deepEqual(elt.moment, elt.moment);
+      });
+
+      test('autoRefresh is lorem ipsum', function() {
+        var elt = fixture('autoRefreshIsLorem_ipsum');
+
+        assert.equal(elt.autoRefresh, true);
+        assert.equal(elt.autoRefreshRate, 0);
+        assert.equal(elt.defaultAutoRefreshRate, 60);
+        assert.equal(elt.datetime, '');
+        assert.equal(elt.format, '');
+        assert.deepEqual(elt.formats, []);
+        assert.equal(elt.fromNow, false);
+        assert.equal(elt.language, '');
+        assert.equal(elt.noSuffix, false);
+        assert.equal(elt.strict, false);
+        assert.equal(elt.unixOffset, 0);
+        assert.equal(elt.unixTimestamp, 0);
+        assert.equal(elt.utc, false);
+        assert.equal(elt.ago, false);
+        assert.equal(elt.intervalId, 0);
+        assert.deepEqual(elt.moment, elt.moment);
+      });
+
+      test('autoRefresh is {}', function() {
+        var elt = fixture('autoRefreshIs{}');
+
+        assert.equal(elt.autoRefresh, true);
+        assert.equal(elt.autoRefreshRate, 0);
+        assert.equal(elt.defaultAutoRefreshRate, 60);
+        assert.equal(elt.datetime, '');
+        assert.equal(elt.format, '');
+        assert.deepEqual(elt.formats, []);
+        assert.equal(elt.fromNow, false);
+        assert.equal(elt.language, '');
+        assert.equal(elt.noSuffix, false);
+        assert.equal(elt.strict, false);
+        assert.equal(elt.unixOffset, 0);
+        assert.equal(elt.unixTimestamp, 0);
+        assert.equal(elt.utc, false);
+        assert.equal(elt.ago, false);
+        assert.equal(elt.intervalId, 0);
+        assert.deepEqual(elt.moment, elt.moment);
+      });
+
+      test('autoRefresh is []', function() {
+        var elt = fixture('autoRefreshIs[]');
+
+        assert.equal(elt.autoRefresh, true);
+        assert.equal(elt.autoRefreshRate, 0);
+        assert.equal(elt.defaultAutoRefreshRate, 60);
+        assert.equal(elt.datetime, '');
+        assert.equal(elt.format, '');
+        assert.deepEqual(elt.formats, []);
+        assert.equal(elt.fromNow, false);
+        assert.equal(elt.language, '');
+        assert.equal(elt.noSuffix, false);
+        assert.equal(elt.strict, false);
+        assert.equal(elt.unixOffset, 0);
+        assert.equal(elt.unixTimestamp, 0);
+        assert.equal(elt.utc, false);
+        assert.equal(elt.ago, false);
+        assert.equal(elt.intervalId, 0);
+        assert.deepEqual(elt.moment, elt.moment);
+      });
+
+      test('autoRefresh is function', function() {
+        var elt = fixture('autoRefreshIsFunction');
+
+        assert.equal(elt.autoRefresh, true);
+        assert.equal(elt.autoRefreshRate, 0);
+        assert.equal(elt.defaultAutoRefreshRate, 60);
+        assert.equal(elt.datetime, '');
+        assert.equal(elt.format, '');
+        assert.deepEqual(elt.formats, []);
+        assert.equal(elt.fromNow, false);
+        assert.equal(elt.language, '');
+        assert.equal(elt.noSuffix, false);
+        assert.equal(elt.strict, false);
+        assert.equal(elt.unixOffset, 0);
+        assert.equal(elt.unixTimestamp, 0);
+        assert.equal(elt.utc, false);
+        assert.equal(elt.ago, false);
+        assert.equal(elt.intervalId, 0);
+        assert.deepEqual(elt.moment, elt.moment);
+      });
+    });
+
+
+
+
+    // 
+    // label attribute tests
+    // 
+    suite("label attribute tests", function() {
+      test('label is undefined', function() {
+        var elt = fixture('labelIsUndefined');
+
+        assert.equal(elt.label, "undefined");
+        assert.equal(elt.icon, '');
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('label is null', function() {
+        var elt = fixture('labelIsNull');
+
+        assert.equal(elt.label, "null");
+        assert.equal(elt.icon, '');
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('label is true', function() {
+        var elt = fixture('labelIsTrue');
+
+        assert.equal(elt.label, "true");
+        assert.equal(elt.icon, '');
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('label is false', function() {
+        var elt = fixture('labelIsFalse');
+
+        assert.equal(elt.label, "false");
+        assert.equal(elt.icon, '');
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('label is -42', function() {
+        var elt = fixture('labelIs-42');
+
+        assert.equal(elt.label, "-42");
+        assert.equal(elt.icon, '');
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('label is 0', function() {
+        var elt = fixture('labelIs0');
+
+        assert.equal(elt.label, "0");
+        assert.equal(elt.icon, '');
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('label is 42', function() {
+        var elt = fixture('labelIs42');
+
+        assert.equal(elt.label, "42");
+        assert.equal(elt.icon, '');
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('label is empty', function() {
+        var elt = fixture('labelIsEmpty');
+
+        assert.equal(elt.label, '');
+        assert.equal(elt.icon, '');
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('label is lorem ipsum', function() {
+        var elt = fixture('labelIsLorem_ipsum');
+
+        assert.equal(elt.label, "lorem ipsum");
+        assert.equal(elt.icon, '');
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('label is {}', function() {
+        var elt = fixture('labelIs{}');
+
+        assert.equal(elt.label, "{}");
+        assert.equal(elt.icon, '');
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('label is []', function() {
+        var elt = fixture('labelIs[]');
+
+        assert.equal(elt.label, "[]");
+        assert.equal(elt.icon, '');
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('label is function', function() {
+        var elt = fixture('labelIsFunction');
+
+        assert.equal(elt.label, "function f() { return undefined; }");
+        assert.equal(elt.icon, '');
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+    });
+
+
+    // 
+    // items attribute tests
+    // 
+    suite("items attribute tests", function() {
+      test('items is undefined', function() {
+        var elt = fixture('itemsIsUndefined');
+
+        // polymer-js deserializes string into null array
+        assert.deepEqual(elt.items, null);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('items is null', function() {
+        var elt = fixture('itemsIsNull');
+
+        assert.deepEqual(elt.items, null);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('items is true', function() {
+        var elt = fixture('itemsIsTrue');
+
+        assert.deepEqual(elt.items, true);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('items is false', function() {
+        var elt = fixture('itemsIsFalse');
+
+        assert.deepEqual(elt.items, false);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('items is -42', function() {
+        var elt = fixture('itemsIs-42');
+
+        assert.deepEqual(elt.items, -42);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('items is 0', function() {
+        var elt = fixture('itemsIs0');
+
+        assert.deepEqual(elt.items, 0);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('items is 42', function() {
+        var elt = fixture('itemsIs42');
+
+        assert.deepEqual(elt.items, 42);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('items is empty', function() {
+        var elt = fixture('itemsIsEmpty');
+
+        assert.deepEqual(elt.items, null);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('items is lorem ipsum', function() {
+        var elt = fixture('itemsIsLorem_ipsum');
+
+        assert.deepEqual(elt.items, null);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('items is {}', function() {
+        var elt = fixture('itemsIs{}');
+
+        assert.deepEqual(elt.items, {});
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('items is []', function() {
+        var elt = fixture('itemsIs[]');
+
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('items is function', function() {
+        var elt = fixture('itemsIsFunction');
+
+        assert.deepEqual(elt.items, null);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+    });
+
+    // 
+    // itemView attribute tests
+    // 
+    suite("itemView attribute tests", function() {
+      test('itemView is undefined', function() {
+        var elt = fixture('itemViewIsUndefined');
+
+        assert.equal(elt.itemView, "undefined");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('itemView is null', function() {
+        var elt = fixture('itemViewIsNull');
+
+        assert.equal(elt.itemView, "null");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('itemView is true', function() {
+        var elt = fixture('itemViewIsTrue');
+
+        assert.equal(elt.itemView, "true");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('itemView is false', function() {
+        var elt = fixture('itemViewIsFalse');
+
+        assert.equal(elt.itemView, "false");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('itemView is -42', function() {
+        var elt = fixture('itemViewIs-42');
+
+        assert.equal(elt.itemView, "-42");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('itemView is 0', function() {
+        var elt = fixture('itemViewIs0');
+
+        assert.equal(elt.itemView, "0");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('itemView is 42', function() {
+        var elt = fixture('itemViewIs42');
+
+        assert.equal(elt.itemView, "42");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('itemView is empty', function() {
+        var elt = fixture('itemViewIsEmpty');
+
+        assert.equal(elt.itemView, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('itemView is lorem ipsum', function() {
+        var elt = fixture('itemViewIsLorem_ipsum');
+
+        assert.equal(elt.itemView, "lorem ipsum");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('itemView is {}', function() {
+        var elt = fixture('itemViewIs{}');
+
+        assert.equal(elt.itemView, "{}");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('itemView is []', function() {
+        var elt = fixture('itemViewIs[]');
+
+        assert.equal(elt.itemView, "[]");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('itemView is function', function() {
+        var elt = fixture('itemViewIsFunction');
+
+        assert.equal(elt.itemView, "function f() { return undefined; }");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.equal(elt.position, 'bottomLeft');
+        assert.equal(elt.selectMode, 'event');
+      });
+    });
+
+    // 
+    // position attribute tests
+    // 
+    suite("position attribute tests", function() {
+      test('position is undefined', function() {
+        var elt = fixture('positionIsUndefined');
+
+        assert.equal(elt.position, "undefined");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('position is null', function() {
+        var elt = fixture('positionIsNull');
+
+        assert.equal(elt.position, "null");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('position is true', function() {
+        var elt = fixture('positionIsTrue');
+
+        assert.equal(elt.position, "true");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('position is false', function() {
+        var elt = fixture('positionIsFalse');
+
+        assert.equal(elt.position, "false");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('position is -42', function() {
+        var elt = fixture('positionIs-42');
+
+        assert.equal(elt.position, "-42");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('position is 0', function() {
+        var elt = fixture('positionIs0');
+
+        assert.equal(elt.position, "0");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('position is 42', function() {
+        var elt = fixture('positionIs42');
+
+        assert.equal(elt.position, "42");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('position is empty', function() {
+        var elt = fixture('positionIsEmpty');
+
+        assert.equal(elt.position, "");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('position is lorem ipsum', function() {
+        var elt = fixture('positionIsLorem_ipsum');
+
+        assert.equal(elt.position, "lorem ipsum");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('position is {}', function() {
+        var elt = fixture('positionIs{}');
+
+        assert.equal(elt.position, "{}");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('position is []', function() {
+        var elt = fixture('positionIs[]');
+
+        assert.equal(elt.position, '[]');
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.selectMode, 'event');
+      });
+
+      test('position is function', function() {
+        var elt = fixture('positionIsFunction');
+
+        assert.equal(elt.position, "function f() { return undefined; }");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.selectMode, 'event');
+      });
+    });
+
+    // 
+    // selectMode attribute tests
+    // 
+    suite("selectMode attribute tests", function() {
+      test('selectMode is undefined', function() {
+        var elt = fixture('selectModeIsUndefined');
+
+        assert.equal(elt.selectMode, "undefined");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+      });
+
+      test('selectMode is null', function() {
+        var elt = fixture('selectModeIsNull');
+
+        assert.equal(elt.selectMode, "null");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+      });
+
+      test('selectMode is true', function() {
+        var elt = fixture('selectModeIsTrue');
+
+        assert.equal(elt.selectMode, "true");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+      });
+
+      test('selectMode is false', function() {
+        var elt = fixture('selectModeIsFalse');
+
+        assert.equal(elt.selectMode, "false");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+      });
+
+      test('selectMode is -42', function() {
+        var elt = fixture('selectModeIs-42');
+
+        assert.equal(elt.selectMode, "-42");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+      });
+
+      test('selectMode is 0', function() {
+        var elt = fixture('selectModeIs0');
+
+        assert.equal(elt.selectMode, "0");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+      });
+
+      test('selectMode is 42', function() {
+        var elt = fixture('selectModeIs42');
+
+        assert.equal(elt.selectMode, "42");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+      });
+
+      test('selectMode is empty', function() {
+        var elt = fixture('selectModeIsEmpty');
+
+        assert.equal(elt.selectMode, "");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+      });
+
+      test('selectMode is lorem ipsum', function() {
+        var elt = fixture('selectModeIsLorem_ipsum');
+
+        assert.equal(elt.selectMode, "lorem ipsum");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+      });
+
+      test('selectMode is {}', function() {
+        var elt = fixture('selectModeIs{}');
+
+        assert.equal(elt.selectMode, "{}");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+      });
+
+      test('selectMode is []', function() {
+        var elt = fixture('selectModeIs[]');
+
+        assert.equal(elt.selectMode, '[]');
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+      });
+
+      test('selectMode is function', function() {
+        var elt = fixture('selectModeIsFunction');
+
+        assert.equal(elt.selectMode, "function f() { return undefined; }");
+        assert.equal(elt.icon, "");
+        assert.equal(elt.label, "");
+        assert.deepEqual(elt.items, []);
+        assert.equal(elt.itemView, itemViewInitVal);
+        assert.equal(elt.position, 'bottomLeft');
+      });
+    });
+
+
+    suite("tests where properties are set as in code", function() { 
+
+      test('invalid icon values', function() {
+        var elt = fixture('propertyTests');
+
+        var actValues = [ 
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }", 
+          undefined, null, true, false, -42, 0, 42, {}, []
+          ];
+
+        var expValues = [ 
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }",
+          undefined, null, true, false, -42, 0, 42, {}, []
+         ];
+
+        for (var i=0; i < actValues.length; i++) { 
+          var actValue = actValues[i];
+          var expValue = expValues[i];
+
+          elt.icon = actValue;
+          assert.deepEqual(elt.icon, expValue);
+          assert.deepEqual(elt.label, "");
+          assert.deepEqual(elt.items, []);
+          assert.deepEqual(elt.itemView, itemViewInitVal);
+          assert.deepEqual(elt.selectMode, "event");
+          assert.deepEqual(elt.position, 'bottomLeft');
+        }
+      });
+
+      test('invalid label values', function() {
+        var elt = fixture('propertyTests');
+
+        var actValues = [ 
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }", 
+          undefined, null, true, false, -42, 0, 42, {}, []
+          ];
+
+        var expValues = [ 
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }",
+          undefined, null, true, false, -42, 0, 42, {}, []
+         ];
+
+        for (var i=0; i < actValues.length; i++) { 
+          var actValue = actValues[i];
+          var expValue = expValues[i];
+
+          elt.label = actValue;
+          assert.deepEqual(elt.icon, "");
+          assert.deepEqual(elt.label, expValue);
+          assert.deepEqual(elt.items, []);
+          assert.deepEqual(elt.itemView, itemViewInitVal);
+          assert.deepEqual(elt.selectMode, "event");
+          assert.deepEqual(elt.position, 'bottomLeft');
+        }
+      });
+
+      test('invalid items values', function() {
+        var elt = fixture('propertyTests');
+
+        var actValues = [ 
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }", 
+          undefined, null, true, false, -42, 0, 42, {}, []
+          ];
+
+        var expValues = [ 
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }",
+          undefined, null, true, false, -42, 0, 42, {}, []
+         ];
+
+        for (var i=0; i < actValues.length; i++) { 
+          var actValue = actValues[i];
+          var expValue = expValues[i];
+
+          elt.items = actValue;
+          assert.deepEqual(elt.icon, "");
+          assert.deepEqual(elt.label, "");
+          assert.deepEqual(elt.items, expValue);
+          assert.deepEqual(elt.itemView, itemViewInitVal);
+          assert.deepEqual(elt.selectMode, "event");
+          assert.deepEqual(elt.position, 'bottomLeft');
+        }
+      });
+
+      test('invalid itemView values', function() {
+        var elt = fixture('propertyTests');
+
+        var actValues = [ 
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }", 
+          undefined, null, true, false, -42, 0, 42, {}, []
+          ];
+
+        var expValues = [ 
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }",
+          undefined, null, true, false, -42, 0, 42, {}, []
+         ];
+
+        for (var i=0; i < actValues.length; i++) { 
+          var actValue = actValues[i];
+          var expValue = expValues[i];
+
+          elt.itemView = actValue;
+          assert.deepEqual(elt.icon, "");
+          assert.deepEqual(elt.label, "");
+          assert.deepEqual(elt.items, []);
+          assert.deepEqual(elt.itemView, expValue);
+          assert.deepEqual(elt.position, 'bottomLeft');
+          assert.deepEqual(elt.selectMode, "event");
+        }
+      });
+
+      test('invalid position values', function() {
+        var elt = fixture('propertyTests');
+
+        var actValues = [ 
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }", 
+          undefined, null, true, false, -42, 0, 42, {}, []
+          ];
+
+        var expValues = [ 
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }",
+          undefined, null, true, false, -42, 0, 42, {}, []
+         ];
+
+        for (var i=0; i < actValues.length; i++) { 
+          var actValue = actValues[i];
+          var expValue = expValues[i];
+
+          elt.position = actValue;
+          assert.deepEqual(elt.icon, "");
+          assert.deepEqual(elt.label, "");
+          assert.deepEqual(elt.items, []);
+          assert.deepEqual(elt.itemView, itemViewInitVal);
+          assert.deepEqual(elt.position, expValue);
+          assert.deepEqual(elt.selectMode, 'event');
+        }
+      });
+
+      test('invalid selectMode values', function() {
+        var elt = fixture('propertyTests');
+
+        var actValues = [ 
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }", 
+          undefined, null, true, false, -42, 0, 42, {}, []
+          ];
+
+        var expValues = [ 
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }",
+          undefined, null, true, false, -42, 0, 42, {}, []
+         ];
+
+        for (var i=0; i < actValues.length; i++) { 
+          var actValue = actValues[i];
+          var expValue = expValues[i];
+
+          elt.selectMode = actValue;
+          assert.deepEqual(elt.icon, "");
+          assert.deepEqual(elt.label, "");
+          assert.deepEqual(elt.items, []);
+          assert.deepEqual(elt.itemView, itemViewInitVal);
+          assert.deepEqual(elt.position, 'bottomLeft');
+          assert.deepEqual(elt.selectMode, expValue);
+        }
+      });
+
+    });
+  </script>
+  </body>
+</html>

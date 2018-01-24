@@ -47,8 +47,7 @@
       },
       formats: {
         type: Array,
-        value: [],
-        reflect: true
+        value: function() { return []; }
       },
       fromNow: {
         type: Boolean,
@@ -88,7 +87,7 @@
       },
       moment: {
         type: Object,
-        value: {}
+        value: function() { return {}; }
       }
     },
 
