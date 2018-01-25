@@ -1,0 +1,232 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>at-carbon-moment tests</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <link rel="import" href="../at-carbon-moment.html">
+  <link rel="import" href="../../iron-test-helpers/iron-test-helpers.html" />
+</head>
+
+<body>
+
+  <test-fixture id="autoRefresh">
+    <template>
+      <at-carbon-moment auto-refresh default-auto-refresh-rate="0.5"></at-carbon-moment>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="autoRefreshAndRate">
+    <template>
+      <at-carbon-moment auto-refresh auto-refresh-rate="0.5"></at-carbon-moment>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="autoRefreshRate">
+    <template>
+      <at-carbon-moment auto-refresh-rate="0.5"></at-carbon-moment>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="propertyTests">
+    <template>
+      <at-carbon-moment></at-carbon-moment>
+    </template>
+  </test-fixture>
+
+  <script>
+    suite('start auto refresh attribute tests', function() {
+
+      setup(function() { 
+        stub('at-carbon-moment', {
+          refresh: function() {
+            if (this._evtCount === undefined) this._evtCount = 0;
+
+            this._evtCount += 1;
+
+            if (this._evtCount === 3) {
+              window.clearInterval(this.intervalId);
+              this._done();
+            }
+            console.log('eventCount is ' + this._evtCount);
+          }
+        });
+
+      });
+
+      test('start auto refresh with autoRefresh set', function(done) {
+        var elt = fixture('autoRefresh');
+        elt._evtCount = 0;
+        elt._done = done;
+      });
+
+      test('start auto refresh with autoRefresh and autoRefreshRate set', function(done) {
+        var elt = fixture('autoRefreshAndRate');
+        elt._evtCount = 0;
+        elt._done = done;
+      });
+
+      test('start auto refresh with autoRefreshRate set', function(done) {
+        var elt = fixture('autoRefreshRate');
+        elt._evtCount = 0;
+        elt._done = done;
+      });
+
+    });
+
+    suite('cancel auto refresh attribute tests', function() {
+
+      setup(function() { 
+        stub('at-carbon-moment', {
+          refresh: function() {
+            if (this._evtCount === undefined) this._evtCount = 0;
+
+            this._evtCount += 1;
+
+            if (this._evtCount === 3) {
+              this.autoRefresh = false;
+              this.autoRefreshRate = 0;
+              this._done();
+            }
+            console.log('eventCount is ' + this._evtCount);
+          }
+        });
+
+      });
+
+      test('cancel auto refresh started with autoRefresh set', function(done) {
+        var elt = fixture('autoRefresh');
+        elt._evtCount = 0;
+        elt._done = done;
+      });
+
+      test('cancel auto refresh started with autoRefresh and autoRefreshRate set', function(done) {
+        var elt = fixture('autoRefreshAndRate');
+        elt._evtCount = 0;
+        elt._done = done;
+      });
+
+      test('cancel auto refresh started with autoRefreshRate set', function(done) {
+        var elt = fixture('autoRefreshRate');
+        elt._evtCount = 0;
+        elt._done = done;
+      });
+
+    });
+
+    suite('auto refresh tests', function() {
+
+      test('start auto refresh with autoRefresh set', function(done) {
+        var elt = fixture('propertyTests');
+        var evtCount = 0;
+
+        elt.refresh = function() {
+          evtCount += 1;
+
+          if (evtCount === 3) {
+            window.clearInterval(elt.intervalId);
+            done();
+          }
+          console.log('eventCount is ' + evtCount);
+        }
+
+        elt.defaultAutoRefreshRate = 0.5;
+        elt.autoRefresh = true;
+      });
+
+      test('start auto refresh with autoRefresh and autoRefreshRate set', function(done) {
+        var elt = fixture('propertyTests');
+        var evtCount = 0;
+
+        elt.refresh = function() {
+          evtCount += 1;
+
+          if (evtCount === 3) {
+            window.clearInterval(elt.intervalId);
+            done();
+          }
+          console.log('eventCount is ' + evtCount);
+        }
+
+        elt.autoRefresh = true;
+        elt.autoRefreshRate = 0.5;
+      });
+
+      test('start auto refresh with autoRefreshRate set', function(done) {
+        var elt = fixture('propertyTests');
+        var evtCount = 0;
+
+        elt.refresh = function() {
+          evtCount += 1;
+
+          if (evtCount === 3) {
+            window.clearInterval(elt.intervalId);
+            done();
+          }
+          console.log('eventCount is ' + evtCount);
+        }
+
+        elt.autoRefreshRate = 0.5;
+      });
+
+      test('cancel auto refresh when autoRefresh is set', function(done) {
+        var elt = fixture('propertyTests');
+        var evtCount = 0;
+
+        elt.refresh = function() {
+          evtCount += 1;
+
+          if (evtCount === 3) {
+            elt.autoRefresh = false;
+            elt.autoRefreshRate = 0;
+            done();
+          }
+          console.log('eventCount is ' + evtCount);
+        }
+
+        elt.defaultAutoRefreshRate = 0.5;
+        elt.autoRefresh = true;
+      });
+
+      test('cancel auto refresh when autoRefresh and autoRefreshRate are set', function(done) {
+        var elt = fixture('propertyTests');
+        var evtCount = 0;
+
+        elt.refresh = function() {
+          evtCount += 1;
+
+          if (evtCount === 3) {
+            elt.autoRefresh = false;
+            elt.autoRefreshRate = 0;
+            done();
+          }
+          console.log('eventCount is ' + evtCount);
+        }
+
+        elt.autoRefresh = true;
+        elt.autoRefreshRate = 0.5;
+      });
+
+      test('cancel auto refresh when autoRefreshRate is set', function(done) {
+        var elt = fixture('propertyTests');
+        var evtCount = 0;
+
+        elt.refresh = function() {
+          evtCount += 1;
+
+          if (evtCount === 3) {
+            elt.autoRefreshRate = 0;
+            done();
+          }
+          console.log('eventCount is ' + evtCount);
+        }
+
+        elt.autoRefreshRate = 0.5;
+      });
+    });
+
+  </script>
+</body>
+</html>

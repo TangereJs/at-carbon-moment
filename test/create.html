@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>at-carbon-moment tests</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <link rel="import" href="../at-carbon-moment.html">
+  <link rel="import" href="../../iron-test-helpers/iron-test-helpers.html" />
+</head>
+
+<body>
+
+  <test-fixture id="propertyTests">
+    <template>
+      <at-carbon-moment></at-carbon-moment>
+    </template>
+  </test-fixture>
+
+  <script>
+    suite('create moment tests', function() {
+
+      test('create from unix offset', function() {
+        var elt = fixture('propertyTests');
+      });
+
+      test('create from unix timestamp', function() {
+        var elt = fixture('propertyTests');
+      });
+
+      test('create from datetime', function() {
+        // variables that affect are 
+        // datetime, format, formats, language, utc, strict
+        var elt = fixture('propertyTests');
+
+      });
+
+      test('assert ago, fromNow and noSuffix output', function() {
+        // variables that affect are 
+        // ago, fromNow, noSuffix
+        var elt = fixture('propertyTests');
+
+      });
+
+    });
+
+  </script>
+</body>
+</html>
