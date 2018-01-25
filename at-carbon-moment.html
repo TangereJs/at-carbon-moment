@@ -141,8 +141,22 @@
       } else if (this.unixTimestamp) {
         this.moment = moment.unix(this.unixTimestamp);
       } else {
+        
+        var formats = [];
+        if (this._isString(this.format) && this.format.length) {
+          formats.push(this.format);
+
+        } else if (this._isArray(this.formats) && this.formats.length) {
+          formats = this.formats;
+        }
+
+        var language = undefined;
+        if (this._isString(this.language) && this.language.length) {
+          language = this.language;
+        }
+
         var fn = this.utc ? moment.utc : moment;
-        this.moment = fn(this.datetime || undefined, this.format || ((this.formats && this.formats.length) ? this.formats : undefined), this.language || undefined, this.strict || undefined);
+        this.moment = fn(this.datetime || undefined, formats, language, !!this.strict);
       }
     },
 
@@ -179,6 +193,11 @@
 
     _isString: function(obj) {
       return Object.prototype.toString.apply(obj) === "[object String]";
+    },
+
+    _isArray: function(obj) {
+      return Object.prototype.toString.apply(obj) === "[object Array]";
     }
+
   });
 </script>
