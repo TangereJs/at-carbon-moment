@@ -37,6 +37,25 @@
         type: Number,
         value: 60
       },
+      
+      intervalId: {
+        type: Number,
+        value: 0
+      },
+
+      unixOffset: {
+        type: Number,
+        value: 0
+      },
+      unixTimestamp: {
+        type: Number,
+        value: 0
+      },
+      
+      utc: {
+        type: Boolean,
+        value: false
+      },
       datetime: {
         type: String,
         value: ''
@@ -49,42 +68,28 @@
         type: Array,
         value: function() { return []; }
       },
-      fromNow: {
-        type: Boolean,
-        value: false
-      },
       language: {
         type: String,
         value: ''
-      },
-      noSuffix: {
-        type: Boolean,
-        value: false
       },
       strict: {
         type: Boolean,
         value: false
       },
-      unixOffset: {
-        type: Number,
-        value: 0
-      },
-      unixTimestamp: {
-        type: Number,
-        value: 0
-      },
-      utc: {
-        type: Boolean,
-        value: false
-      },
+
       ago: {
         type: Boolean,
         value: false
       },
-      intervalId: {
-        type: Number,
-        value: 0
+      fromNow: {
+        type: Boolean,
+        value: false
       },
+      noSuffix: {
+        type: Boolean,
+        value: false
+      },
+      
       moment: {
         type: Object,
         value: function() { return {}; }
