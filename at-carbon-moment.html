@@ -177,6 +177,8 @@
       if (!this._isString(this.datetime)) return;
       if (!this.datetime.length) return;
 
+      if (!moment.isMoment(this.moment)) return;
+
       //Treated as a null value || DateTime.MinValue()
       //Therefore string displaying moment should be empty
       if (this.datetime.indexOf("0001-01-01T") == 0) {
