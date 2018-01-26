@@ -153,13 +153,15 @@
 
       if (this.unixOffset) {
         this.moment = moment(this.unixOffset);
+      
       } else if (this.unixTimestamp) {
         this.moment = moment.unix(this.unixTimestamp);
+
       } else {
         
-        var formats = [];
+        var formats = undefined;
         if (this._isString(this.format) && this.format.length) {
-          formats.push(this.format);
+          formats = this.format;
 
         } else if (this._isArray(this.formats) && this.formats.length) {
           formats = this.formats;
