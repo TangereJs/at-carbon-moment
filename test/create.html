@@ -7,6 +7,7 @@
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../../web-component-tester/browser.js"></script>
   <link rel="import" href="../at-carbon-moment.html">
+  <link rel="import" href="../momentjs-import.html" />
   <link rel="import" href="../../iron-test-helpers/iron-test-helpers.html" />
 </head>
 
@@ -20,13 +21,66 @@
 
   <script>
     suite('create moment tests', function() {
-
       test('create from unix offset', function() {
         var elt = fixture('propertyTests');
+
+        // unix offset is a number of miliseconds since Unix Epoch (Jan 1 1970 12AM UTC)
+        // lets target 2016-11-05 (november 5th)
+        var offset = 1478304000000;
+
+        var expMoment = moment(offset);
+        var expUtcMoment = moment.utc(offset);
+
+        elt.unixOffset = offset;
+
+        // carbon-moment will create internal moment object with time in utc
+        assert.equal(elt.moment.isSame(expMoment), true);
+        // internal moment object is the same as utc moment object with same unixOffset
+        assert.equal(elt.moment.isSame(expUtcMoment), true);
+
+        var expMomentStr = expMoment.format(); // this will return time string in local time
+        var expUtcMomentStr = expUtcMoment.format(); // this will return time string in utc
+
+        var actMomentStr = elt.moment.format(); // act time string is in local time
+
+        assert.equal(actMomentStr, expMomentStr);
+        assert.notEqual(actMomentStr, expUtcMomentStr);
+
+        // On refresh, moment created with unixOffset doens't change text content 
+        elt.refresh();
+
+        assert.equal(elt.textContent.trim(), '');
       });
 
       test('create from unix timestamp', function() {
         var elt = fixture('propertyTests');
+
+        // unix timestamp is a number of seconds since Unix Epoch (Jan 1 1970 12AM UTC)
+        // lets target 2016-11-05 (november 5th)
+        var offset = 1478304000;
+
+        var expMoment = moment.unix(offset);
+        var expUtcMoment = moment.unix(offset).utc();
+
+        elt.unixTimestamp = offset;
+
+        // carbon-moment will create internal moment object with time in utc
+        assert.equal(elt.moment.isSame(expMoment), true);
+        // internal moment object is the same as utc moment object with same unixTimestamp
+        assert.equal(elt.moment.isSame(expUtcMoment), true);
+
+        var expMomentStr = expMoment.format(); // this will return time string in local time
+        var expUtcMomentStr = expUtcMoment.format(); // this will return time string in utc
+
+        var actMomentStr = elt.moment.format(); // act time string is in local time
+
+        assert.equal(actMomentStr, expMomentStr);
+        assert.notEqual(actMomentStr, expUtcMomentStr);
+
+        // On refresh, moment created with unixOffset doens't change text content 
+        elt.refresh();
+
+        assert.equal(elt.textContent.trim(), '');
       });
 
       test('create from datetime', function() {
@@ -34,15 +88,550 @@
         // datetime, format, formats, language, utc, strict
         var elt = fixture('propertyTests');
 
+        var datetimeStr = "2018-01-26";
+        var expMoment = moment(datetimeStr);
+
+        elt.datetime = datetimeStr;
+        assert.equal(elt.moment.isSame(expMoment), true);
+
+        var expMomentStr = expMoment.format();
+        var actMomentStr = elt.moment.format();
+
+        assert.equal(actMomentStr, expMomentStr);
+
+        elt.refresh();
+
+        assert.equal(elt.textContent.trim(), expMomentStr);
+
+        // set utc. This will re-create the moment object in utc time
+
+        elt.utc = true;
+
+        var expUtcMoment = moment.utc(datetimeStr);
+        assert.equal(elt.moment.isSame(expUtcMoment), true);
+
+        var expUtcMomentStr = expUtcMoment.format();
+        var actUtcMomentStr = elt.moment.format();
+
+        assert.equal(expUtcMomentStr, actUtcMomentStr);
+
+        elt.refresh();
+
+        assert.equal(elt.textContent.trim(), expUtcMomentStr);
       });
 
-      test('assert ago, fromNow and noSuffix output', function() {
+      test('create from datetime in specified format in strict mode', function() {
         // variables that affect are 
-        // ago, fromNow, noSuffix
+        // datetime, format, formats, language, utc, strict
         var elt = fixture('propertyTests');
 
+        var format = "DD-MM-YYYY";
+        elt.format = format;
+        var strictVal = true;
+        elt.strict = strictVal;
+
+        var datetimeStr = "2018-01-26";
+        var expMoment = moment(datetimeStr, format, undefined, strictVal);
+
+        elt.datetime = datetimeStr;
+        assert.equal(elt.moment.isValid(), false);
+        assert.equal(elt.moment.isValid(), expMoment.isValid());
+
+        var expMomentStr = expMoment.format();
+        var actMomentStr = elt.moment.format();
+
+        assert.equal(actMomentStr, expMomentStr);
+
+        elt.refresh();
+
+        assert.equal(actMomentStr, "Invalid date");
+        assert.equal(elt.textContent.trim(), expMomentStr);
+
+        // set utc. This will re-create the moment object in utc time
+
+        elt.utc = true;
+
+        var expUtcMoment = moment.utc(datetimeStr, format, undefined, strictVal);
+
+        assert.equal(elt.moment.isValid(), false);
+        assert.equal(elt.moment.isValid(), expUtcMoment.isValid());
+
+        var expUtcMomentStr = expUtcMoment.format();
+        var actUtcMomentStr = elt.moment.format();
+
+        assert.equal(expUtcMomentStr, actUtcMomentStr);
+
+        elt.refresh();
+
+        assert.equal(actUtcMomentStr, "Invalid date");
+        assert.equal(elt.textContent.trim(), expUtcMomentStr);
+
+        elt.utc = false;
+        datetimeStr = "26-01-2018";
+
+        var expMoment = moment(datetimeStr, format, undefined, strictVal);
+
+        elt.datetime = datetimeStr;
+        assert.equal(elt.moment.isValid(), true);
+        assert.equal(elt.moment.isSame(expMoment), true);
+
+        var expMomentStr = expMoment.format();
+        var actMomentStr = elt.moment.format();
+
+        assert.equal(actMomentStr, expMomentStr);
+
+        elt.refresh();
+
+        assert.equal(actMomentStr, "2018-01-26T00:00:00+01:00");
+        assert.equal(elt.textContent.trim(), expMomentStr);
+
+        // set utc. This will re-create the moment object in utc time
+
+        elt.utc = true;
+
+        var expUtcMoment = moment.utc(datetimeStr, format, undefined, strictVal);
+
+        assert.equal(elt.moment.isValid(), true);
+        assert.equal(elt.moment.isSame(expUtcMoment), true);
+
+        var expUtcMomentStr = expUtcMoment.format();
+        var actUtcMomentStr = elt.moment.format();
+
+        assert.equal(expUtcMomentStr, actUtcMomentStr);
+
+        elt.refresh();
+
+        assert.equal(actUtcMomentStr, "2018-01-26T00:00:00+00:00");
+        assert.equal(elt.textContent.trim(), expUtcMomentStr);
       });
 
+      test('create from datetime in specified format in non-strict mode', function() {
+        // variables that affect are 
+        // datetime, format, formats, language, utc, strict
+        var elt = fixture('propertyTests');
+
+        var format = "DD-MM-YYYY";
+        elt.format = format;
+        var strictVal = false;
+        elt.strict = strictVal;
+
+        var datetimeStr = "2018-01-26";
+        var expMoment = moment(datetimeStr, format, undefined, strictVal);
+
+        elt.datetime = datetimeStr;
+        assert.equal(elt.moment.isValid(), true);
+        assert.equal(elt.moment.isValid(), expMoment.isValid());
+
+        var expMomentStr = expMoment.format();
+        var actMomentStr = elt.moment.format();
+
+        assert.equal(actMomentStr, expMomentStr);
+
+        elt.refresh();
+
+        // because strict is false, datetimeStr was parsed into wrong value
+        assert.equal(actMomentStr, "2026-01-20T00:00:00+01:00");
+        assert.equal(elt.textContent.trim(), expMomentStr);
+
+        // set utc. This will re-create the moment object in utc time
+
+        elt.utc = true;
+
+        var expUtcMoment = moment.utc(datetimeStr, format, undefined, strictVal);
+
+        assert.equal(elt.moment.isValid(), true);
+        assert.equal(elt.moment.isValid(), expUtcMoment.isValid());
+
+        var expUtcMomentStr = expUtcMoment.format();
+        var actUtcMomentStr = elt.moment.format();
+
+        assert.equal(expUtcMomentStr, actUtcMomentStr);
+
+        elt.refresh();
+
+        assert.equal(actMomentStr, "2026-01-20T00:00:00+01:00");
+        assert.equal(elt.textContent.trim(), expUtcMomentStr);
+
+        elt.utc = false;
+        datetimeStr = "26-01-2018";
+
+        var expMoment = moment(datetimeStr, format, undefined, strictVal);
+
+        elt.datetime = datetimeStr;
+        assert.equal(elt.moment.isValid(), true);
+        assert.equal(elt.moment.isSame(expMoment), true);
+
+        var expMomentStr = expMoment.format();
+        var actMomentStr = elt.moment.format();
+
+        assert.equal(actMomentStr, expMomentStr);
+
+        elt.refresh();
+        // because strict is false, and datetimeStr matches format, datetimestr was parsed into correct value
+        assert.equal(actMomentStr, "2018-01-26T00:00:00+01:00");
+        assert.equal(elt.textContent.trim(), expMomentStr);
+
+        // set utc. This will re-create the moment object in utc time
+
+        elt.utc = true;
+
+        var expUtcMoment = moment.utc(datetimeStr, format, undefined, strictVal);
+
+        assert.equal(elt.moment.isValid(), true);
+        assert.equal(elt.moment.isSame(expUtcMoment), true);
+
+        var expUtcMomentStr = expUtcMoment.format();
+        var actUtcMomentStr = elt.moment.format();
+
+        assert.equal(expUtcMomentStr, actUtcMomentStr);
+
+        elt.refresh();
+
+        assert.equal(actUtcMomentStr, "2018-01-26T00:00:00+00:00");
+        assert.equal(elt.textContent.trim(), expUtcMomentStr);
+      });
+
+
+      // 
+      // 
+      // 
+      // 
+      // WHEN ARRAY OF FORMATS IS USED
+      // 
+      // 
+      // 
+      // 
+
+      test('create from datetime in specified formats in strict mode', function() {
+        // variables that affect are 
+        // datetime, format, formats, language, utc, strict
+        var elt = fixture('propertyTests');
+
+        var formats = [ "YYYY-MM-DD", "DD-MM-YYYY" ];
+        elt.formats = formats;
+        var strictVal = true;
+        elt.strict = strictVal;
+
+        var datetimeStr = "2018-01-26";
+        var expMoment = moment(datetimeStr, formats, undefined, strictVal);
+
+        elt.datetime = datetimeStr;
+        assert.equal(elt.moment.isValid(), true);
+        assert.equal(elt.moment.isValid(), expMoment.isValid());
+
+        var expMomentStr = expMoment.format();
+        var actMomentStr = elt.moment.format();
+
+        assert.equal(actMomentStr, expMomentStr);
+
+        elt.refresh();
+
+        // moment used first format to correctly parse the string
+        assert.equal(actMomentStr, "2018-01-26T00:00:00+01:00");
+        assert.equal(elt.textContent.trim(), expMomentStr);
+
+        // set utc. This will re-create the moment object in utc time
+
+        elt.utc = true;
+
+        var expUtcMoment = moment.utc(datetimeStr, formats, undefined, strictVal);
+
+        assert.equal(elt.moment.isValid(), true);
+        assert.equal(elt.moment.isValid(), expUtcMoment.isValid());
+
+        var expUtcMomentStr = expUtcMoment.format();
+        var actUtcMomentStr = elt.moment.format();
+
+        assert.equal(expUtcMomentStr, actUtcMomentStr);
+
+        elt.refresh();
+
+        // moment used first format to correctly parse the string
+        assert.equal(actUtcMomentStr, "2018-01-26T00:00:00+00:00");
+        assert.equal(elt.textContent.trim(), expUtcMomentStr);
+
+        elt.utc = false;
+        datetimeStr = "26-01-2018";
+
+        var expMoment = moment(datetimeStr, formats, undefined, strictVal);
+
+        elt.datetime = datetimeStr;
+        assert.equal(elt.moment.isValid(), true);
+        assert.equal(elt.moment.isSame(expMoment), true);
+
+        var expMomentStr = expMoment.format();
+        var actMomentStr = elt.moment.format();
+
+        assert.equal(actMomentStr, expMomentStr);
+
+        elt.refresh();
+
+        // moment used second format to correctly parse the string
+        assert.equal(actMomentStr, "2018-01-26T00:00:00+01:00");
+        assert.equal(elt.textContent.trim(), expMomentStr);
+
+        // set utc. This will re-create the moment object in utc time
+
+        elt.utc = true;
+
+        var expUtcMoment = moment.utc(datetimeStr, formats, undefined, strictVal);
+
+        assert.equal(elt.moment.isValid(), true);
+        assert.equal(elt.moment.isSame(expUtcMoment), true);
+
+        var expUtcMomentStr = expUtcMoment.format();
+        var actUtcMomentStr = elt.moment.format();
+
+        assert.equal(expUtcMomentStr, actUtcMomentStr);
+
+        elt.refresh();
+
+        // moment used second format to correctly parse the string
+        assert.equal(actUtcMomentStr, "2018-01-26T00:00:00+00:00");
+        assert.equal(elt.textContent.trim(), expUtcMomentStr);
+      });
+
+      test('create from datetime in specified formats in non-strict mode', function() {
+        // variables that affect are 
+        // datetime, format, formats, language, utc, strict
+        var elt = fixture('propertyTests');
+
+        var formats = [ "MM-YYYY-DD", "DD-MM-YYYY" ];
+        elt.formats = formats;
+        var strictVal = false;
+        elt.strict = strictVal;
+
+        var datetimeStr = "2018-01-26";
+        var expMoment = moment(datetimeStr, formats, undefined, strictVal);
+
+        elt.datetime = datetimeStr;
+        assert.equal(elt.moment.isValid(), true);
+        assert.equal(elt.moment.isValid(), expMoment.isValid());
+
+        var expMomentStr = expMoment.format();
+        var actMomentStr = elt.moment.format();
+
+        assert.equal(actMomentStr, expMomentStr);
+
+        elt.refresh();
+
+        // moment used second format to parse the string, but because of format, value is not correct
+        assert.equal(actMomentStr, "2026-01-20T00:00:00+01:00");
+        assert.equal(elt.textContent.trim(), expMomentStr);
+
+        // set utc. This will re-create the moment object in utc time
+
+        elt.utc = true;
+
+        var expUtcMoment = moment.utc(datetimeStr, formats, undefined, strictVal);
+
+        assert.equal(elt.moment.isValid(), true);
+        assert.equal(elt.moment.isValid(), expUtcMoment.isValid());
+
+        var expUtcMomentStr = expUtcMoment.format();
+        var actUtcMomentStr = elt.moment.format();
+
+        assert.equal(expUtcMomentStr, actUtcMomentStr);
+
+        elt.refresh();
+
+        // moment used second format to parse the string, but because of format, value is not correct
+        assert.equal(actUtcMomentStr, "2026-01-20T00:00:00+00:00");
+        assert.equal(elt.textContent.trim(), expUtcMomentStr);
+
+        elt.utc = false;
+        datetimeStr = "26-01-2018";
+
+        var expMoment = moment(datetimeStr, formats, undefined, strictVal);
+
+        elt.datetime = datetimeStr;
+        assert.equal(elt.moment.isValid(), true);
+        assert.equal(elt.moment.isSame(expMoment), true);
+
+        var expMomentStr = expMoment.format();
+        var actMomentStr = elt.moment.format();
+
+        assert.equal(actMomentStr, expMomentStr);
+
+        elt.refresh();
+
+        // moment used second format to correctly parse the string
+        assert.equal(actMomentStr, "2018-01-26T00:00:00+01:00");
+        assert.equal(elt.textContent.trim(), expMomentStr);
+
+        // set utc. This will re-create the moment object in utc time
+
+        elt.utc = true;
+
+        var expUtcMoment = moment.utc(datetimeStr, formats, undefined, strictVal);
+
+        assert.equal(elt.moment.isValid(), true);
+        assert.equal(elt.moment.isSame(expUtcMoment), true);
+
+        var expUtcMomentStr = expUtcMoment.format();
+        var actUtcMomentStr = elt.moment.format();
+
+        assert.equal(expUtcMomentStr, actUtcMomentStr);
+
+        elt.refresh();
+
+        // moment used second format to correctly parse the string
+        assert.equal(actUtcMomentStr, "2018-01-26T00:00:00+00:00");
+        assert.equal(elt.textContent.trim(), expUtcMomentStr);
+      });
+
+      test('create from datetime and language', function() {
+        // variables that affect are 
+        // datetime, format, formats, language, utc, strict
+        var elt = fixture('propertyTests');
+
+        var lang = "sr";
+        elt.lang = lang;
+
+        var datetimeStr = "26 januar 2018";
+        var expMoment = moment(datetimeStr, undefined, lang);
+
+        elt.datetime = datetimeStr;
+        assert.equal(elt.moment.isValid(), true);
+        assert.equal(elt.moment.isValid(), expMoment.isValid());
+        assert.equal(elt.moment.isSame(expMoment), true);
+
+        var expMomentStr = expMoment.format();
+        var actMomentStr = elt.moment.format();
+
+        assert.equal(actMomentStr, expMomentStr);
+
+        elt.refresh();
+        assert.equal(actMomentStr, "2018-01-26T00:00:00+01:00");
+        assert.equal(elt.textContent.trim(), expMomentStr);
+
+        // set utc. This will re-create the moment object in utc time
+
+        elt.utc = true;
+
+        var expUtcMoment = moment.utc(datetimeStr, undefined, lang);
+        assert.equal(elt.moment.isValid(), true);
+        assert.equal(elt.moment.isValid(), expUtcMoment.isValid());
+        assert.equal(elt.moment.isSame(expUtcMoment), true);
+
+        var expUtcMomentStr = expUtcMoment.format();
+        var actUtcMomentStr = elt.moment.format();
+
+        assert.equal(expUtcMomentStr, actUtcMomentStr);
+
+        elt.refresh();
+
+        assert.equal(actUtcMomentStr, "2018-01-26T00:00:00+00:00");
+        assert.equal(elt.textContent.trim(), expUtcMomentStr);
+      });
+    });
+
+    suite('ago, fromNow and noSuffix tests', function() {
+      
+      var clearDateTimeStr = "0001-01-01T00:00:00+00:00";
+
+      test('assert ago output', function() {
+        var elt = fixture('propertyTests');
+
+        elt.ago = true;
+
+        // when datetimestr is before now, datetime will be displayed
+        var datetimeStr = "2018-01-25";
+        var expMoment = moment(datetimeStr);
+        assert(expMoment.isBefore(moment()), true);
+
+        elt.datetime = datetimeStr;
+          
+        var expMomentStr = expMoment.format();
+        var actMomentStr = elt.moment.format();
+
+        assert.equal(actMomentStr, "2018-01-25T00:00:00+01:00");
+        assert.equal(elt.textContent, expMoment.format());
+
+        // when datetimestr is before now, textcontent will be cleared
+        var datetimeStr = "2018-01-27";
+        var expMoment = moment(datetimeStr);
+        assert(expMoment.isAfter(moment()), true);
+
+        elt.datetime = datetimeStr;
+          
+        var expMomentStr = expMoment.format();
+        var actMomentStr = elt.moment.format();
+
+        assert.equal(actMomentStr, "2018-01-27T00:00:00+01:00");
+        assert.equal(elt.textContent, "");
+
+        // when ago is false
+        elt.ago = false;
+
+        // when datetimestr is before now, datetime will be displayed
+        var datetimeStr = "2018-01-25";
+        var expMoment = moment(datetimeStr);
+        assert(expMoment.isBefore(moment()), true);
+
+        elt.datetime = datetimeStr;
+          
+        var expMomentStr = expMoment.format();
+        var actMomentStr = elt.moment.format();
+
+        assert.equal(actMomentStr, "2018-01-25T00:00:00+01:00");
+        assert.equal(elt.textContent, expMoment.format());
+
+        // when datetimestr is after now, datetime will be displayed
+        var datetimeStr = "2018-01-27";
+        var expMoment = moment(datetimeStr);
+        assert(expMoment.isAfter(moment()), true);
+
+        elt.datetime = datetimeStr;
+          
+        var expMomentStr = expMoment.format();
+        var actMomentStr = elt.moment.format();
+
+        assert.equal(actMomentStr, "2018-01-27T00:00:00+01:00");
+        assert.equal(elt.textContent, expMomentStr);
+
+        // setting "0001-01-01T" will clear text content
+        elt.datetime = clearDateTimeStr;
+        assert.equal(elt.textContent, "");
+      });
+
+      test('assert fromNow and noSuffix output', function() {
+        var elt = fixture('propertyTests');
+
+        var datetimeStr = "2018-01-26";
+        var expMoment = moment(datetimeStr);
+
+        elt.datetime = datetimeStr;
+
+        assert.equal(elt.moment.isSame(expMoment), true);
+
+        var expMomentStr = expMoment.format();
+        var actMomentStr = elt.moment.format();
+        
+        assert.equal(actMomentStr, expMomentStr);
+        assert.equal(elt.textContent, expMomentStr);
+
+        elt.fromNow = true;
+
+        var expMomentStr = expMoment.fromNow();
+        var actMomentStr = elt.moment.fromNow();
+        
+        assert.equal(actMomentStr, expMomentStr);
+        assert.equal(elt.textContent, expMomentStr);
+
+        elt.noSuffix = true;
+
+        var expMomentStr = expMoment.fromNow(true);
+        var actMomentStr = elt.moment.fromNow(true);
+
+        assert.equal(actMomentStr, expMomentStr);
+        assert.equal(elt.textContent, expMomentStr);
+
+        // setting "0001-01-01T" will clear text content
+        elt.datetime = clearDateTimeStr;
+        assert.equal(elt.textContent, "");
+      });
+      
     });
 
   </script>
