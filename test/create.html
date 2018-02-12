@@ -538,7 +538,7 @@
         // when datetimestr is before now, datetime will be displayed
         var datetimeStr = "2018-01-25";
         var expMoment = moment(datetimeStr);
-        assert(expMoment.isBefore(moment()), true);
+        assert.equal(expMoment.isBefore(moment()), true);
 
         elt.datetime = datetimeStr;
           
@@ -549,16 +549,16 @@
         assert.equal(elt.textContent, expMoment.format());
 
         // when datetimestr is before now, textcontent will be cleared
-        var datetimeStr = "2018-01-27";
+        var datetimeStr = "2019-01-27";
         var expMoment = moment(datetimeStr);
-        assert(expMoment.isAfter(moment()), true);
+        assert.equal(expMoment.isAfter(moment()), true);
 
         elt.datetime = datetimeStr;
           
         var expMomentStr = expMoment.format();
         var actMomentStr = elt.moment.format();
 
-        assert.equal(actMomentStr, "2018-01-27T00:00:00+01:00");
+        assert.equal(actMomentStr, "2019-01-27T00:00:00+01:00");
         assert.equal(elt.textContent, "");
 
         // when ago is false
@@ -567,7 +567,7 @@
         // when datetimestr is before now, datetime will be displayed
         var datetimeStr = "2018-01-25";
         var expMoment = moment(datetimeStr);
-        assert(expMoment.isBefore(moment()), true);
+        assert.equal(expMoment.isBefore(moment()), true);
 
         elt.datetime = datetimeStr;
           
@@ -578,16 +578,16 @@
         assert.equal(elt.textContent, expMoment.format());
 
         // when datetimestr is after now, datetime will be displayed
-        var datetimeStr = "2018-01-27";
+        var datetimeStr = "2019-01-27";
         var expMoment = moment(datetimeStr);
-        assert(expMoment.isAfter(moment()), true);
+        assert.equal(expMoment.isAfter(moment()), true);
 
         elt.datetime = datetimeStr;
           
         var expMomentStr = expMoment.format();
         var actMomentStr = elt.moment.format();
 
-        assert.equal(actMomentStr, "2018-01-27T00:00:00+01:00");
+        assert.equal(actMomentStr, "2019-01-27T00:00:00+01:00");
         assert.equal(elt.textContent, expMomentStr);
 
         // setting "0001-01-01T" will clear text content
