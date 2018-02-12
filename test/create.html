@@ -20,6 +20,27 @@
   </test-fixture>
 
   <script>
+    var appendTimezoneOffset = function(dateStr) {
+      if (this._tzOffsetStr !== undefined) {
+        return [dateStr, "T00:00:00+", this._tzOffsetStr].join("");
+      }
+
+      var tzMomentStr = moment().format();
+      var parts = tzMomentStr.split("+");
+      this._tzOffsetStr = parts[1];
+
+      return [dateStr, "T00:00:00+", this._tzOffsetStr].join("");
+    }
+
+    var isTestEnvInUTC = function() {
+      if (this._cachedResult !== undefined) return this._cachedResult;
+      
+      var nonUtcMoment = moment();
+      var utcMoment = moment.utc();
+      this._cachedResult = nonUtcMoment.isSame(utcMoment);
+      return this._cachedResult;
+    }
+
     suite('create moment tests', function() {
       test('create from unix offset', function() {
         var elt = fixture('propertyTests');
@@ -44,7 +65,11 @@
         var actMomentStr = elt.moment.format(); // act time string is in local time
 
         assert.equal(actMomentStr, expMomentStr);
-        assert.notEqual(actMomentStr, expUtcMomentStr);
+        if (isTestEnvInUTC()) {
+          assert.equal(actMomentStr, expMomentStr);
+        } else {
+          assert.notEqual(actMomentStr, expUtcMomentStr);
+        }
 
         // On refresh, moment created with unixOffset doens't change text content 
         elt.refresh();
@@ -75,7 +100,11 @@
         var actMomentStr = elt.moment.format(); // act time string is in local time
 
         assert.equal(actMomentStr, expMomentStr);
-        assert.notEqual(actMomentStr, expUtcMomentStr);
+        if (isTestEnvInUTC()) {
+          assert.equal(actMomentStr, expMomentStr);
+        } else {
+          assert.notEqual(actMomentStr, expUtcMomentStr);
+        }
 
         // On refresh, moment created with unixOffset doens't change text content 
         elt.refresh();
@@ -182,7 +211,7 @@
 
         elt.refresh();
 
-        assert.equal(actMomentStr, "2018-01-26T00:00:00+01:00");
+        assert.equal(actMomentStr, appendTimezoneOffset("2018-01-26"));
         assert.equal(elt.textContent.trim(), expMomentStr);
 
         // set utc. This will re-create the moment object in utc time
@@ -230,7 +259,7 @@
         elt.refresh();
 
         // because strict is false, datetimeStr was parsed into wrong value
-        assert.equal(actMomentStr, "2026-01-20T00:00:00+01:00");
+        assert.equal(actMomentStr, appendTimezoneOffset("2026-01-20"));
         assert.equal(elt.textContent.trim(), expMomentStr);
 
         // set utc. This will re-create the moment object in utc time
@@ -249,7 +278,7 @@
 
         elt.refresh();
 
-        assert.equal(actMomentStr, "2026-01-20T00:00:00+01:00");
+        assert.equal(actMomentStr, appendTimezoneOffset("2026-01-20"));
         assert.equal(elt.textContent.trim(), expUtcMomentStr);
 
         elt.utc = false;
@@ -268,7 +297,7 @@
 
         elt.refresh();
         // because strict is false, and datetimeStr matches format, datetimestr was parsed into correct value
-        assert.equal(actMomentStr, "2018-01-26T00:00:00+01:00");
+        assert.equal(actMomentStr, appendTimezoneOffset("2018-01-26"));
         assert.equal(elt.textContent.trim(), expMomentStr);
 
         // set utc. This will re-create the moment object in utc time
@@ -326,8 +355,7 @@
 
         elt.refresh();
 
-        // moment used first format to correctly parse the string
-        assert.equal(actMomentStr, "2018-01-26T00:00:00+01:00");
+        assert.equal(actMomentStr, appendTimezoneOffset("2018-01-26"));
         assert.equal(elt.textContent.trim(), expMomentStr);
 
         // set utc. This will re-create the moment object in utc time
@@ -366,8 +394,7 @@
 
         elt.refresh();
 
-        // moment used second format to correctly parse the string
-        assert.equal(actMomentStr, "2018-01-26T00:00:00+01:00");
+        assert.equal(actMomentStr, appendTimezoneOffset("2018-01-26"));
         assert.equal(elt.textContent.trim(), expMomentStr);
 
         // set utc. This will re-create the moment object in utc time
@@ -416,7 +443,7 @@
         elt.refresh();
 
         // moment used second format to parse the string, but because of format, value is not correct
-        assert.equal(actMomentStr, "2026-01-20T00:00:00+01:00");
+        assert.equal(actMomentStr, appendTimezoneOffset("2026-01-20"));
         assert.equal(elt.textContent.trim(), expMomentStr);
 
         // set utc. This will re-create the moment object in utc time
@@ -456,7 +483,7 @@
         elt.refresh();
 
         // moment used second format to correctly parse the string
-        assert.equal(actMomentStr, "2018-01-26T00:00:00+01:00");
+        assert.equal(actMomentStr, appendTimezoneOffset("2018-01-26"));
         assert.equal(elt.textContent.trim(), expMomentStr);
 
         // set utc. This will re-create the moment object in utc time
@@ -502,7 +529,7 @@
         assert.equal(actMomentStr, expMomentStr);
 
         elt.refresh();
-        assert.equal(actMomentStr, "2018-01-26T00:00:00+01:00");
+        assert.equal(actMomentStr, appendTimezoneOffset("2018-01-26"));
         assert.equal(elt.textContent.trim(), expMomentStr);
 
         // set utc. This will re-create the moment object in utc time
@@ -545,7 +572,7 @@
         var expMomentStr = expMoment.format();
         var actMomentStr = elt.moment.format();
 
-        assert.equal(actMomentStr, "2018-01-25T00:00:00+01:00");
+        assert.equal(actMomentStr, appendTimezoneOffset("2018-01-25"));
         assert.equal(elt.textContent, expMoment.format());
 
         // when datetimestr is before now, textcontent will be cleared
@@ -558,7 +585,7 @@
         var expMomentStr = expMoment.format();
         var actMomentStr = elt.moment.format();
 
-        assert.equal(actMomentStr, "2019-01-27T00:00:00+01:00");
+        assert.equal(actMomentStr, appendTimezoneOffset("2019-01-27"));
         assert.equal(elt.textContent, "");
 
         // when ago is false
@@ -574,7 +601,7 @@
         var expMomentStr = expMoment.format();
         var actMomentStr = elt.moment.format();
 
-        assert.equal(actMomentStr, "2018-01-25T00:00:00+01:00");
+        assert.equal(actMomentStr, appendTimezoneOffset("2018-01-25"));
         assert.equal(elt.textContent, expMoment.format());
 
         // when datetimestr is after now, datetime will be displayed
@@ -586,8 +613,8 @@
           
         var expMomentStr = expMoment.format();
         var actMomentStr = elt.moment.format();
-
-        assert.equal(actMomentStr, "2019-01-27T00:00:00+01:00");
+        
+        assert.equal(actMomentStr, appendTimezoneOffset("2019-01-27"));
         assert.equal(elt.textContent, expMomentStr);
 
         // setting "0001-01-01T" will clear text content
