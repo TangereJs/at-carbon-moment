@@ -24,8 +24,11 @@
       if (this._tzOffsetStr !== undefined) {
         return [dateStr, "T00:00:00+", this._tzOffsetStr].join("");
       }
-
-      var tzMomentStr = moment().format();
+      
+      // we can use moment(dateStr) becuase dateStr is in YYYY-MM-DD format which is a standard ISO format for dates
+      // we need to compute _tzOffsetStr from dateStr (as opposite from moment() which is now) 
+      // because dateStr and now can be in different DST zones; ie. dateStr can be in january (no DST) and now can be in july (DST applies)
+      var tzMomentStr = moment(dateStr).format();
       var parts = tzMomentStr.split("+");
       this._tzOffsetStr = parts[1];
 
