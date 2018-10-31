@@ -1,4 +1,5 @@
 <link rel="import" href="../tangere/tangere.html">
+<link rel="import" href="momentjs-import.html">
 
 <dom-module id="at-carbon-moment">
   <template>
@@ -172,6 +173,7 @@
           language = this.language;
         }
 
+        
         var fn = this.utc ? moment.utc : moment;
         this.moment = fn(this.datetime || undefined, formats, language, !!this.strict);
       }
