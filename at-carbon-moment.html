@@ -80,7 +80,7 @@
       },
       format: {
         type: String,
-        value: ''
+        value: 'LLL'
       },
       formats: {
         type: Array,
@@ -163,10 +163,14 @@
       } else {
         
         var formats = undefined;
-        if (this._isString(this.format) && this.format.length) {
-          formats = this.format;
 
-        } else if (this._isArray(this.formats) && this.formats.length) {
+        // 
+        // To make format property work as display output format, previous requirement for it be the parsing format for datetime property has to be abandoned
+        // To supply parsing formats use formats property instead
+        // 
+        // -- ij, on 2018-11-23
+        
+        if (this._isArray(this.formats) && this.formats.length) {
           formats = this.formats;
         }
 
