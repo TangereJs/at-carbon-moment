@@ -209,7 +209,7 @@
         this._textOutput = "";
 
       } else {
-        this._textOutput = (this.fromNow) ? this.moment.fromNow(this.noSuffix) : this.moment.format();
+        this._textOutput = (this.fromNow) ? this.moment.fromNow(this.noSuffix) : this.moment.format(this.format);
       }
       //            else{
       //                this._textOutput = "";
