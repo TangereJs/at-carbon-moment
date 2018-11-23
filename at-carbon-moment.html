@@ -5,9 +5,11 @@
   <template>
     <style>
       :host {
-        display: block;
+        display: inline-block;
+        box-sizing: border-box;
       }
     </style>
+    <div>[[_textOutput]]</div>
   </template>
 </dom-module>
 <script>
@@ -201,16 +203,16 @@
       //Treated as a null value || DateTime.MinValue()
       //Therefore string displaying moment should be empty
       if (this.datetime.indexOf("0001-01-01T") == 0) {
-        this.textContent = "";
+        this._textOutput = "";
 
       } else if (this.ago && this.moment.isAfter(moment())) {
-        this.textContent = "";
+        this._textOutput = "";
 
       } else {
-        this.textContent = (this.fromNow) ? this.moment.fromNow(this.noSuffix) : this.moment.format();
+        this._textOutput = (this.fromNow) ? this.moment.fromNow(this.noSuffix) : this.moment.format();
       }
       //            else{
-      //                this.textContent = "";
+      //                this._textOutput = "";
       //            }
     },
 
