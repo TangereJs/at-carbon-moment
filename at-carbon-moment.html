@@ -106,18 +106,12 @@
       noSuffix: {
         type: Boolean,
         value: false
-      },
-      
-      moment: {
-        type: Object,
-        value: function() { return {}; }
       }
     },
 
     observers: [
       'createMoment(datetime, format, formats, fromNow, language, noSuffix, strict, unixOffset, unixTimestamp, utc, ago)',
-      'autoRefreshChanged(autoRefresh, autoRefreshRate)',
-      'momentChanged(moment.*)'
+      'autoRefreshChanged(autoRefresh, autoRefreshRate)'
     ],
 
     ready: function() {
@@ -183,13 +177,7 @@
         var fn = this.utc ? moment.utc : moment;
         this.moment = fn(this.datetime || undefined, formats, language, !!this.strict);
       }
-    },
-
-    momentChanged: function() {
-      if (!this._afterReady) {
-        return;
-      }
-
+      
       this.refresh();
     },
 
