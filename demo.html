@@ -14,6 +14,10 @@
       font-weight: bold;
       margin: 16px 0px 2px 0px !important;
     }
+    
+    at-carbon-moment {
+      display: block;
+    }
   </style>
 
 </head>
@@ -45,7 +49,7 @@
   <button id="btnSetMoment"> Set Moment </button>
 
   <p>Replaces dates in future with now:</p>
-  <at-carbon-moment datetime="2016-10-02T00:40:26" ago></at-carbon-moment>
+  <at-carbon-moment datetime="2026-10-02T00:40:26" ago></at-carbon-moment>
 
   <p>0001-01-01T19:00:00Z as NULL:</p>
   <at-carbon-moment datetime="0001-01-01T19:00:00" from-now></at-carbon-moment>
@@ -57,7 +61,7 @@
 
   <p>All of the above in utc mode:</p>
   <at-carbon-moment utc></at-carbon-moment>
-  <at-carbon-moment datetime="2012 juillet" format="YYYY MMM" language="fr" strict utc></at-carbon-moment>
+  <at-carbon-moment datetime="17 juillet 2012" format="YYYY MMM" language="fr" strict utc></at-carbon-moment>
   <at-carbon-moment datetime="05-25-1995" formats='["MM-DD-YYYY", "YYYY-MM-DD"]' strict utc></at-carbon-moment>
 
 
